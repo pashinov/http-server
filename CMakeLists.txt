@@ -13,7 +13,7 @@ set_target_properties( ${TARGET} PROPERTIES
 # compilation flags
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLINUX" )
 
-# PROJECT
+# project variable
 set ( PROJECT server )
 
 # project name
@@ -28,12 +28,14 @@ set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
 
 # location of header files
 include_directories( "inc"
+		"inc/conf_manager"
 		"inc/common"
 		"inc/logger"
 		)
 
 # location of source files
 aux_source_directory( src SOURCES )
+aux_source_directory( src/conf_manager SOURCES )
 aux_source_directory( src/common SOURCES )
 aux_source_directory( src/logger SOURCES )
 
@@ -41,4 +43,4 @@ aux_source_directory( src/logger SOURCES )
 add_executable( ${PROJECT} ${SOURCES} )
 
 # link process
-target_link_libraries( ${PROJECT} )
+target_link_libraries( ${PROJECT} -lyaml-cpp )
