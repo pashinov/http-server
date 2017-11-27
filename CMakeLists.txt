@@ -5,10 +5,10 @@ cmake_minimum_required( VERSION 3.7.2 FATAL_ERROR)
 
 # choice of standard
 set_target_properties( ${TARGET} PROPERTIES
-		CXX_STANDARD 17
-		CXX_STANDARD_REQUIRED YES
-		CXX_EXTENSIONS NO
-		)
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED YES
+        CXX_EXTENSIONS NO
+        )
 
 # compilation flags
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLINUX" )
@@ -28,10 +28,10 @@ set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
 
 # location of header files
 include_directories( "inc"
-		"inc/conf_manager"
-		"inc/common"
-		"inc/logger"
-		)
+        "inc/conf_manager"
+        "inc/common"
+        "inc/logger"
+        )
 
 # location of source files
 aux_source_directory( src SOURCES )
