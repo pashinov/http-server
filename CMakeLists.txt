@@ -1,39 +1,44 @@
-# Сборочный файл для программы
+# assembly file
 
-# Минимальная версия CMake
-cmake_minimum_required( VERSION 3.7.2 )
+# stop if cmake version below 3.7.2
+cmake_minimum_required( VERSION 3.7.2 FATAL_ERROR)
 
-# Указываем компилятору на стандарт
-set_target_properties(${TARGET} PROPERTIES
+# choice of standard
+set_target_properties( ${TARGET} PROPERTIES
 		CXX_STANDARD 17
 		CXX_STANDARD_REQUIRED YES
 		CXX_EXTENSIONS NO
 		)
 
-# Устанавливаем флаги компилятора
+# compilation flags
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLINUX" )
 
-# Устанавливаем значение переменной PROJECT
+# PROJECT
 set ( PROJECT server )
 
-# Имя проекта
+# project name
 project ( ${PROJECT} )
 
-set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build )
-set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/bin)
+# project version
+set( VERSION_MAJOR 1 )
+set( VERSION_MINOR 0 )
 
-# Указываем пути, где искать заголовочники, дополнительно к стандартным путям
-include_directories ( "inc"
-					"inc/common"
-					"inc/logger" )
+# output folder for binaries
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
 
-# Собираем исходные файлы программы
+# location of header files
+include_directories( "inc"
+		"inc/common"
+		"inc/logger"
+		)
+
+# location of source files
 aux_source_directory( src SOURCES )
 aux_source_directory( src/common SOURCES )
 aux_source_directory( src/logger SOURCES )
 
-# Собираем исполняемый файл с именем ${PROJECT}
+# build executable
 add_executable( ${PROJECT} ${SOURCES} )
 
-# Линковка исполняемого файла
+# link process
 target_link_libraries( ${PROJECT} )
