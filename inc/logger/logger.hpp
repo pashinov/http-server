@@ -80,9 +80,9 @@ private:
     std::string print(level level, std::string message) const noexcept;
 
 private:
-    //!
+    //! level filter for log messages
     level level_filter_;
-    //!
+    //! log filename
     std::string filename_;
     //!
     mutable std::mutex mutex_log_;
