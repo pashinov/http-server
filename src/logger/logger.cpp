@@ -16,7 +16,7 @@ void logger::init_log_file(std::string filename)
     filename_ = filename;
     if (this->push(level_filter_, "Logfile initialization complete"))
     {
-        throw;
+        throw; //TODO:
     }
 }
 
@@ -28,7 +28,7 @@ void logger::init_log_file(level log_level, std::string filename)
     level_filter_ = log_level;
     if (this->push(level_filter_, "Logfile initialization complete"))
     {
-        throw;
+        throw; //TODO:
     }
 }
 
@@ -45,7 +45,7 @@ void logger::log(level log_level, std::string message) const
     {
         if (this->push(log_level, message))
         {
-            throw;
+            throw; //TODO:
         }
     }
 }
@@ -61,11 +61,11 @@ void logger::clear_log_file() const
             stream.open(filename_,  std::ios::out | std::ios::trunc);
             if(!stream.is_open())
             {
-                throw;
+                throw; //TODO:
             }
             if (this->push(level_filter_, "Logfile initialization complete"))
             {
-                throw;
+                throw; //TODO:
             }
             stream.close();
         }

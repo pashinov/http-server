@@ -1,7 +1,7 @@
 /**
  *  File: logger.hpp
  *
- *  Description:
+ *  Description: Logger class
  */
 
 #ifndef LOGGER_H
@@ -33,43 +33,49 @@ public:
     logger& operator=(const logger& copy) = delete;
 
     /**
-     * @brief
+     * @brief initialization logfile
+     * @throw TODO:
      */
     void init_log_file(std::string filename);
 
     /**
-     * @brief
+     * @brief initialization logfile
+     * @throw TODO:
      */
     void init_log_file(level log_level, std::string filename);
 
     /**
-     * @brief
+     * @brief set default log level
      */
     void set_log_level(level log_level) noexcept;
 
     /**
-     * @brief
+     * @brief get current default log level
      */
     level get_log_level(void) const noexcept {return level_filter_;};
 
     /**
-     * @brief
+     * @brief write log message
+     * @throw TODO:
      */
     void log(level level, std::string message) const;
 
     /**
-     * @brief
+     * @brief clear log file
+     * @throw TODO:
      */
     void clear_log_file() const;
 
 private:
     /**
-     * @brief
+     * @brief write log message
+     * @return status bool flag
      */
     bool push(level level, std::string message) const noexcept;
 
     /**
-     * @brief
+     * @brief create string which will write to log file (datetime + level + message)
+     * @return created message
      */
     std::string print(level level, std::string message) const noexcept;
 
