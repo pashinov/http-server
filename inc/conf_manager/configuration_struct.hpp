@@ -13,32 +13,32 @@
 //////////////////////////////////////////////////////////////////////////
 struct configuration_struct
 {
-	std::string server_name_;
+    std::string server_name_;
 
-	struct connection_ep
-	{
-		std::string ip_address_;
-		std::uint16_t port_;
-	};
+    struct connection_ep
+    {
+        std::string ip_address_;
+        std::uint16_t port_;
+    };
 
-	struct paths
-	{
+    struct paths
+    {
         struct path_pidfile
         {
             std::string pidfile_;
         };
 
-		struct path_logfile
-		{
-			std::string logfile_;
-		};
+        struct path_logfile
+        {
+            std::string logfile_;
+        };
 
-		path_pidfile pid_;
-		path_logfile log_;
-	};
+        path_pidfile pid_;
+        path_logfile log_;
+    };
 
-	connection_ep connection_ep_;
-	paths paths_;
+    connection_ep connection_ep_;
+    paths paths_;
 };
 
 #endif // CONFIG_STRUCT_H_

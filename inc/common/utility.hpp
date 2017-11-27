@@ -15,9 +15,9 @@
 namespace utility
 {
     /**
-    * @brief generate current date and time
-    * @return current datatime string (ex. "Thu Nov 23 11:51:50 2017")
-    */
+     * @brief generate current date and time
+     * @return current datatime string (ex. "Thu Nov 23 11:51:50 2017")
+     */
     std::string get_date_time(void);
 };
 
