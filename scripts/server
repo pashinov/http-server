@@ -1,17 +1,17 @@
 #!/bin/sh
 
-#project binary
+# project binary
 PROJECT_NAME="server";
 PROJECT="/usr/local/bin/$PROJECT_NAME"
 
-#pidfile
+# pidfile
 PIDFILE_NAME="$PROJECT_NAME.pid"
 PIDFILE="/var/run/$PROJECT_NAME.pid"
 
 case "$1" in
     start)
         if [ -x $PROJECT ]; then
-            $PROJECT
+            sudo $PROJECT
         else
             echo "Binary file $PROJECT_NAME not found"
         fi
@@ -33,8 +33,8 @@ case "$1" in
 
     stop)
         if [ -f $PIDFILE ]; then
-            kill -USR1 $(cat $PIDFILE)
-            rm -f $PIDFILE
+            sudo kill -USR1 $(cat $PIDFILE)
+            sudo rm $PIDFILE # TODO
         else
             echo "$PIDFILE_NAME: No such file"
         fi
