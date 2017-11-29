@@ -58,6 +58,12 @@ public:
      * @brief write log message
      * @throw TODO:
      */
+    void log(std::string message) const;
+
+    /**
+     * @brief write log message
+     * @throw TODO:
+     */
     void log(level level, std::string message) const;
 
     /**
