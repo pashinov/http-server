@@ -9,14 +9,14 @@ Server:
 
   #--- Connection endpoint settings ---
   Connection endpiont:
-    ip_addr: '0.0.0.0'
+    ip_addr: '127.0.0.1'
     port: '12345'
 
   #--- Paths ---
   Paths:
     #--- Path to log file ---
     Log:
-      logfile: '/var/log/server/server_log'
+      logfile: '/var/log/server/logfile'
 
     #--- Path to pid file ---
     Pid:

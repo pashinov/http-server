@@ -1,5 +1,7 @@
 #include <iomanip>
 
+#include <configuration_manager.hpp>
+#include <logger.hpp>
 #include <utility.hpp>
 
 //////////////////////////////////////////////////////////////////////////
@@ -10,4 +12,30 @@ std::string utility::get_date_time(void)
     datetime << std::put_time(std::localtime(&t), "%a %b %d %H:%M:%S %Y");
 
     return datetime.str();
+}
+
+//////////////////////////////////////////////////////////////////////////
+void utility::initialization_config(std::string filename)
+{
+    try
+    {
+        configuration_manager::instance().load_config_file(filename);
+    }
+    catch (...)
+    {
+        throw;
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////
+void utility::initialization_logger(std::string filename)
+{
+    try
+    {
+        logger::instance().init_log_file(filename);
+    }
+    catch (...)
+    {
+        throw;
+    }
 }
