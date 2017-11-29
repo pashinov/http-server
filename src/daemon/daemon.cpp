@@ -41,7 +41,8 @@ void daemon::daemonize() const
 
                 default:
                 {
-                    daemon::write_pid(getpid(), configuration_manager::instance().get_config()->paths_.pid_.pidfile_);
+                    daemon::create_pidfile(getpid(), configuration_manager::instance().get_config()->
+                            paths_.pid_.pidfile_);
 
                     sigset_t sigset;
                     siginfo_t siginfo;
@@ -52,11 +53,15 @@ void daemon::daemonize() const
 
                     if (siginfo.si_signo == SIGCHLD)
                     {
+                        daemon::remove_pidfile(configuration_manager::instance().get_config()->
+                                paths_.pid_.pidfile_);
                         waitpid(pid, 0, WNOHANG);
                         exit(EXIT_SUCCESS);
                     }
                     else if (siginfo.si_signo == SIGUSR1)
                     {
+                        daemon::remove_pidfile(configuration_manager::instance().get_config()->
+                                paths_.pid_.pidfile_);
                         kill(pid, SIGKILL); // TODO
                         exit(EXIT_SUCCESS);
                     }
@@ -84,16 +89,25 @@ void daemon::run() const
     // TODO
 }
 
-bool daemon::write_pid(pid_t pid, std::string filename) const noexcept
+bool daemon::create_pidfile(pid_t pid, std::string filename) const noexcept
 {
     assert(!filename.empty());
 
     std::ofstream stream;
     stream.open(filename, std::ios::out);
-    if(!stream.is_open()) { return true; }
+    if(!stream.is_open()) { return true; };
     std::string spid = std::to_string(pid);
     stream.write(spid.c_str(), spid.size());
     stream.close();
+
+    return false;
+}
+
+bool daemon::remove_pidfile(std::string filename) const noexcept
+{
+    assert(!filename.empty());
+
+    if (std::remove(filename.c_str())) { return true; };
 
     return false;
 }

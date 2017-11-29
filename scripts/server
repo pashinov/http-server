@@ -34,7 +34,6 @@ case "$1" in
     stop)
         if [ -f $PIDFILE ]; then
             sudo kill -USR1 $(cat $PIDFILE)
-            sudo rm $PIDFILE # TODO
         else
             echo "$PIDFILE_NAME: No such file"
         fi

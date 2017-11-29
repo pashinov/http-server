@@ -33,10 +33,18 @@ private:
 	void run() const;
 
     /**
-     * @brief write pid number to file
+     * @brief create pid file contain pid number
+     * current process
      * @return bool status flag
      */
-	bool write_pid(pid_t pid, std::string filename) const noexcept;
+	bool create_pidfile(pid_t pid, std::string filename) const noexcept;
+
+    /**
+     * @brief remove pid file contain pid number
+     * current process
+     * @return bool status flag
+     */
+    bool remove_pidfile(std::string filename) const noexcept;
 
     /**
      * @brief add POSIX signal sets
