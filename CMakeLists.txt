@@ -32,6 +32,7 @@ include_directories( "inc"
         "inc/common"
         "inc/daemon"
         "inc/logger"
+        "inc/thread_raii"
         )
 
 # location of source files
@@ -40,6 +41,7 @@ aux_source_directory( src/common SOURCES )
 aux_source_directory( src/conf_manager SOURCES )
 aux_source_directory( src/daemon SOURCES )
 aux_source_directory( src/logger SOURCES )
+aux_source_directory( src/thread_raii SOURCES )
 
 # build executable
 add_executable( ${PROJECT_NAME} ${SOURCES} )
