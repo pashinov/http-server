@@ -55,10 +55,10 @@ public:
 
 private:
     //! TODO
-	std::thread thread_;
+    std::thread thread_;
 
     //! TODO
-	cancellation_token token_;
+    cancellation_token token_;
 };
 
 template <typename Function, typename... Args>
