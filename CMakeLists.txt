@@ -32,6 +32,7 @@ include_directories( "inc"
         "inc/common"
         "inc/daemon"
         "inc/logger"
+        "inc/safe_queue"
         "inc/thread_raii"
         )
 
@@ -47,7 +48,7 @@ aux_source_directory( src/thread_raii SOURCES )
 add_executable( ${PROJECT_NAME} ${SOURCES} )
 
 # link process
-target_link_libraries( ${PROJECT_NAME} -lyaml-cpp )
+target_link_libraries( ${PROJECT_NAME} -pthread -lyaml-cpp )
 
 # create log directory
 set( log_directory "/var/log/${PROJECT_NAME}")
