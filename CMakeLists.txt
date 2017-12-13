@@ -42,6 +42,7 @@ aux_source_directory( src SOURCES )
 aux_source_directory( src/common SOURCES )
 aux_source_directory( src/conf_manager SOURCES )
 aux_source_directory( src/daemon SOURCES )
+aux_source_directory( src/delegate SOURCES )
 aux_source_directory( src/logger SOURCES )
 aux_source_directory( src/thread_raii SOURCES )
 

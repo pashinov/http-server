@@ -25,7 +25,7 @@ class safe_queue
 
 public:
 
-    /*! Create safe queue. */
+    /*! Create safe queue */
     safe_queue() = default;
 
     /*! Move constructor */
@@ -41,7 +41,7 @@ public:
         queue_ = sq.queue_;
     }
 
-    /*! Destroy safe queue. */
+    /*! Destroy safe queue */
     ~safe_queue()
     {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -81,7 +81,7 @@ public:
      * @param[in] item An item.
      * @return true if an item was pushed into the queue
      */
-    bool push (const value_type&& item)
+    bool push(const value_type&& item)
     {
         std::lock_guard<std::mutex>lock(mutex_);
 
