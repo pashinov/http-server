@@ -14,7 +14,6 @@
 #include <cstdint>
 #include <condition_variable>
 
-
 /** A thread-safe asynchronous queue */
 template <class T, class container = std::list<T>>
 class safe_queue
@@ -25,7 +24,7 @@ class safe_queue
 
 public:
 
-    /*! Create safe queue. */
+    /*! Create safe queue */
     safe_queue() = default;
 
     /*! Move constructor */
@@ -41,7 +40,7 @@ public:
         queue_ = sq.queue_;
     }
 
-    /*! Destroy safe queue. */
+    /*! Destroy safe queue */
     ~safe_queue()
     {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -81,7 +80,7 @@ public:
      * @param[in] item An item.
      * @return true if an item was pushed into the queue
      */
-    bool push (const value_type&& item)
+    bool push(const value_type&& item)
     {
         std::lock_guard<std::mutex>lock(mutex_);
 
@@ -237,7 +236,7 @@ public:
 
     /**
      * @brief Check if the queue is empty.
-     * @return true if queue is empty.
+     * @return True if queue is empty.
      */
     bool empty() const
     {
@@ -304,10 +303,13 @@ public:
 
 
 private:
-
+    //! Queue
     std::queue<T, container> queue_;
+    //! Mutex
     mutable std::mutex mutex_;
+    //! Condition variable
     std::condition_variable condition_;
+    //! Max number of items in the queue
     unsigned int max_num_items_ = 0;
 };
 
