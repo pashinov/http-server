@@ -1,37 +1,33 @@
 /**
- * File: daemon.h
+ * File: background_application.hpp
  *
- * Description: Run a program as a Unix daemon.
+ * Description: Run a program as a unix daemon.
  * You need to override the run() method.
  */
 
 #include <signal.h>
+#include <string>
 
-#ifndef DAEMON_H_
-#define DAEMON_H_
+#ifndef BACKGROUND_APPLICATION_H_
+#define BACKGROUND_APPLICATION_H_
 
-class daemon
+class background_application
 {
 public:
-    daemon() = default;
-    ~daemon() = default;
+    background_application() = default;
+    virtual ~background_application() {};
 
     /**
-     * @brief daemonize runs a program as a Unix daemon
-     * @throw TODO
+     * @brief runs a program as a Unix daemon
      */
-    void daemonize() const;
+    void start_background() noexcept;
 
-    daemon(const daemon& copy) = delete;
-    daemon& operator=(const daemon& copy) = delete;
+    /**
+     * @brief main function
+     */
+    virtual void run() = 0;
 
 private:
-    /**
-     * @brief user function (must be overridden)
-     * @throw TODO
-     */
-	void run() const;
-
     /**
      * @brief create pid file contain pid number
      * current process
@@ -52,8 +48,8 @@ private:
     void set_signal(sigset_t& sigset, siginfo_t& siginfo) const noexcept;
 
 private:
-    //! which process runs
-    enum class type_process : pid_t { CHILD_PROCESS = 0, ERROR_PROCESS = -1 };
+    //! which process running
+    enum class process : pid_t { CHILD_PROCESS = 0, ERROR_PROCESS = -1 };
 };
 
-#endif // DAEMON_H_
+#endif // BACKGROUND_APPLICATION_H_
