@@ -10,9 +10,6 @@ set_target_properties( ${TARGET} PROPERTIES
         CXX_EXTENSIONS NO
         )
 
-# compilation flags
-set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLINUX" )
-
 # project variable
 set ( PROJECT_NAME server )
 

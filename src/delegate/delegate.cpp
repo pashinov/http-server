@@ -1,16 +1,16 @@
 #include <delegate.hpp>
 
 //////////////////////////////////////////////////////////////////////////
-std::uint64_t delegate<void>::connect(std::function<void()> const & delegate) const noexcept
+std::uint32_t delegate<void>::connect(std::function<void()> const & delegate) const noexcept
 {
     table_.insert(std::make_pair(id_, delegate));
     return id_;
 }
 
 //////////////////////////////////////////////////////////////////////////
-void delegate<void>::disconnect(std::uint64_t delegate) const noexcept
+void delegate<void>::disconnect(std::uint32_t id) const noexcept
 {
-    table_.erase(delegate);
+    table_.erase(id);
 }
 
 //////////////////////////////////////////////////////////////////////////

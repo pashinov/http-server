@@ -14,7 +14,6 @@
 #include <cstdint>
 #include <condition_variable>
 
-
 /** A thread-safe asynchronous queue */
 template <class T, class container = std::list<T>>
 class safe_queue
@@ -237,7 +236,7 @@ public:
 
     /**
      * @brief Check if the queue is empty.
-     * @return true if queue is empty.
+     * @return True if queue is empty.
      */
     bool empty() const
     {
@@ -304,10 +303,13 @@ public:
 
 
 private:
-
+    //! Queue
     std::queue<T, container> queue_;
+    //! Mutex
     mutable std::mutex mutex_;
+    //! Condition variable
     std::condition_variable condition_;
+    //! Max number of items in the queue
     unsigned int max_num_items_ = 0;
 };
 
