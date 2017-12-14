@@ -10,9 +10,6 @@ set_target_properties( ${TARGET} PROPERTIES
         CXX_EXTENSIONS NO
         )
 
-# compilation flags
-set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLINUX" )
-
 # project variable
 set ( PROJECT_NAME server )
 
@@ -28,9 +25,9 @@ set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
 
 # location of header files
 include_directories( "inc"
+        "inc/application"
         "inc/conf_manager"
         "inc/common"
-        "inc/daemon"
         "inc/logger"
         "inc/safe_queue"
         "inc/thread_raii"
@@ -38,9 +35,9 @@ include_directories( "inc"
 
 # location of source files
 aux_source_directory( src SOURCES )
+aux_source_directory( src/application SOURCES )
 aux_source_directory( src/common SOURCES )
 aux_source_directory( src/conf_manager SOURCES )
-aux_source_directory( src/daemon SOURCES )
 aux_source_directory( src/logger SOURCES )
 aux_source_directory( src/thread_raii SOURCES )
 
