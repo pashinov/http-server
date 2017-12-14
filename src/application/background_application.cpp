@@ -33,14 +33,14 @@ void background_application::start_background() noexcept
             sid = setsid();
             if (sid < 0)
             {
-                //TODO save error to log
+                logger::instance().log("Failed to create new SID for child process");
                 std::exit(EXIT_FAILURE);
             }
 
             /* Change the current working directory */
             if ((chdir("/")) < 0)
             {
-                //TODO save error to log
+                logger::instance().log("Failed to set working directory");
                 std::exit(EXIT_FAILURE);
             }
 
@@ -65,7 +65,7 @@ void background_application::start_background() noexcept
 
                 case static_cast<pid_t>(background_application::process::ERROR_PROCESS):
                 {
-                    //TODO save error to log
+                    logger::instance().log("Failed to create worker process");
                     std::exit(EXIT_FAILURE);
                 }
 
@@ -74,7 +74,7 @@ void background_application::start_background() noexcept
                     if (background_application::create_pidfile(getpid(), configuration_manager::instance().get_config()->
                             paths_.pid_.pidfile_))
                     {
-                        //TODO save error to log
+                        logger::instance().log("Failed to create pidfile");
                         std::exit(EXIT_FAILURE);
                     }
 
@@ -96,7 +96,7 @@ void background_application::start_background() noexcept
                     {
                         background_application::remove_pidfile(configuration_manager::instance().get_config()->
                                 paths_.pid_.pidfile_);
-                        kill(pid, SIGKILL); //TODO
+                        kill(pid, SIGUSR1);
                         std::exit(EXIT_SUCCESS);
                     }
                     break;
@@ -108,7 +108,7 @@ void background_application::start_background() noexcept
 
         case static_cast<pid_t>(background_application::process::ERROR_PROCESS):
         {
-            //TODO save error to log
+            logger::instance().log("Failed to create master process");
             std::exit(EXIT_FAILURE);
         }
 
