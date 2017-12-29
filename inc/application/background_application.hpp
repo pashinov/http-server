@@ -5,11 +5,13 @@
  * You need to override the run() method.
  */
 
-#include <signal.h>
-#include <string>
+#pragma once
 
 #ifndef BACKGROUND_APPLICATION_H_
 #define BACKGROUND_APPLICATION_H_
+
+#include <signal.h>
+#include <string>
 
 class background_application
 {

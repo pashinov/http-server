@@ -4,6 +4,8 @@
  * Description: Thread-safe queue
 */
 
+#pragma once
+
 #ifndef SAFE_QUEUE_HPP_
 #define SAFE_QUEUE_HPP_
 

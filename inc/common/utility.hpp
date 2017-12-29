@@ -4,6 +4,8 @@
  *  Description: Generic utility functions
  */
 
+#pragma once
+
 #ifndef UTILITY_H
 #define UTILITY_H
 

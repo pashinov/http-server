@@ -4,6 +4,8 @@
  * Description:
  */
 
+#pragma once
+
 #ifndef DELEGATE_H_
 #define DELEGATE_H_
 

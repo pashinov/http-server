@@ -5,6 +5,8 @@
  *
  */
 
+#pragma once
+
 #ifndef CONFIG_STRUCT_H_
 #define CONFIG_STRUCT_H_
 

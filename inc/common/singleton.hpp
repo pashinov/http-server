@@ -4,8 +4,10 @@
  *  Description: Singleton base class
  */
 
-#ifndef __SINGLETON_H__
-#define __SINGLETON_H__
+#pragma once
+
+#ifndef SINGLETON_H_
+#define SINGLETON_H_
 
 #include <cassert>
 #include <memory>
@@ -47,4 +49,4 @@ public:
 
 template <class T> std::shared_ptr<T> singleton<T>::instance_ = nullptr;
 
-#endif
+#endif // SINGLETON_H_

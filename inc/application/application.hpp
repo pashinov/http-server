@@ -4,12 +4,14 @@
  * Description: User application
  */
 
-#include <signal.h>
-
-#include <background_application.hpp>
+#pragma once
 
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
+
+#include <signal.h>
+
+#include <background_application.hpp>
 
 class application : public background_application
 {
