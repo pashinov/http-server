@@ -29,6 +29,7 @@ include_directories( "inc"
         "inc/conf_manager"
         "inc/common"
         "inc/delegate"
+        "inc/http_server"
         "inc/logger"
         "inc/safe_queue"
         "inc/thread_raii"
@@ -40,6 +41,7 @@ aux_source_directory( src/application SOURCES )
 aux_source_directory( src/common SOURCES )
 aux_source_directory( src/conf_manager SOURCES )
 aux_source_directory( src/delegate SOURCES )
+aux_source_directory( src/http_server SOURCES )
 aux_source_directory( src/logger SOURCES )
 aux_source_directory( src/thread_raii SOURCES )
 
@@ -47,7 +49,7 @@ aux_source_directory( src/thread_raii SOURCES )
 add_executable( ${PROJECT_NAME} ${SOURCES} )
 
 # link process
-target_link_libraries( ${PROJECT_NAME} -pthread -lyaml-cpp )
+target_link_libraries( ${PROJECT_NAME} -pthread -lyaml-cpp -lboost_system)
 
 # create log directory
 set( log_directory "/var/log/${PROJECT_NAME}")
