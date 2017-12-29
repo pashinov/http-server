@@ -4,6 +4,8 @@
  *  Description: Configuration manager
  */
 
+#pragma once
+
 #ifndef CONFIGURATION_MANAGER_H_
 #define CONFIGURATION_MANAGER_H_
 
@@ -72,4 +74,4 @@ private:
     YAML::Node config_ = YAML::Node(YAML::NodeType::Map);
 };
 
-#endif //CONFIGURATION_MANAGER_H_
+#endif // CONFIGURATION_MANAGER_H_

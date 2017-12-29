@@ -4,6 +4,8 @@
  * Description: RAII std::thread
  */
 
+#pragma once
+
 #ifndef RAII_THREAD_H_
 #define RAII_THREAD_H_
 
