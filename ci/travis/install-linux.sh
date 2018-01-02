@@ -20,6 +20,10 @@ mkdir -p $CMAKE_DIR
 tar --strip-components=1 -xzf $CMAKE_TAR -C $CMAKE_DIR
 export PATH=$CMAKE_DIR/bin:$PATH
 
+# manually install boost latest version
+sudo apt-get install libboost-all-dev
+
+# manually install yaml-cpp 0.5.3
 git clone --depth=50 --branch=yaml-cpp-0.5.3 https://github.com/jbeder/yaml-cpp.git
 pushd yaml-cpp
 mkdir build
