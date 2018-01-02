@@ -1,0 +1,29 @@
+#...............................................................................
+#
+# Travis CI
+#
+#...............................................................................
+
+dist:     trusty
+sudo:     required
+language: cpp
+
+os:
+    - linux
+
+compiler:
+    - gcc
+
+env:
+    matrix:
+        - BUILD_CONFIGURATION=Debug
+        - BUILD_CONFIGURATION=Release
+
+install:
+    - bash ci/travis/install-linux.sh
+
+script:
+    - mkdir build
+    - cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+    - make
