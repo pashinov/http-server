@@ -16,12 +16,47 @@ set ( PROJECT_NAME server )
 # project name
 project ( ${PROJECT_NAME} )
 
-# project version
-set( VERSION_MAJOR 1 )
-set( VERSION_MINOR 0 )
-
 # output folder for binaries
 set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
+
+
+################################
+# GTest
+################################
+set(GOOGLETEST_ROOT external/googletest/googletest CACHE STRING "Google Test source root")
+
+include_directories(
+        ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}
+        ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}/include
+)
+
+set(GOOGLETEST_SOURCES
+        ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}/src/gtest-all.cc
+        ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}/src/gtest_main.cc
+        )
+
+foreach(_source ${GOOGLETEST_SOURCES})
+    set_source_files_properties(${_source} PROPERTIES GENERATED 1)
+endforeach()
+
+add_library(gtest ${GOOGLETEST_SOURCES})
+
+include_directories(
+        inc/conf_manager
+        ${GTEST_INCLUDE_DIRS}
+)
+
+# location of source test files
+aux_source_directory( tests SOURCES_TEST )
+aux_source_directory( src/conf_manager SOURCES_TEST )
+
+add_executable( GoogleTest ${SOURCES_TEST} )
+target_link_libraries( GoogleTest gtest  gtest_main pthread yaml-cpp )
+
+enable_testing()
+add_test( GoogleTest GoogleTest )
+################################
+
 
 # location of header files
 include_directories( "inc"
@@ -47,7 +82,7 @@ aux_source_directory( src/thread_raii SOURCES )
 add_executable( ${PROJECT_NAME} ${SOURCES} )
 
 # link process
-target_link_libraries( ${PROJECT_NAME} -pthread -lyaml-cpp )
+target_link_libraries( ${PROJECT_NAME} pthread yaml-cpp )
 
 # create log directory
 set( log_directory "/var/log/${PROJECT_NAME}")

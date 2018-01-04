@@ -32,6 +32,8 @@ install:
 
 script:
     - mkdir build
-    - cd build
+    - pushd build
     - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
     - make
+    - popd
+    - ./GoogleTest
