@@ -28,7 +28,7 @@ TEST(ConfManager, CorrectFile)
 TEST(ConfManager, IncorrectName)
 {
     std::string filename = "tests/configs/incorrect_name.yaml";
-    EXPECT_ANY_THROW({ configuration_manager::instance_ptr()->load_config_file(filename); });
+    EXPECT_THROW(configuration_manager::instance_ptr()->load_config_file(filename), YAML::Exception);
 
     std::string server_name = configuration_manager::instance_ptr()->get_config()->server_name_;
     ASSERT_EQ(server_name, "");
@@ -39,7 +39,7 @@ TEST(ConfManager, IncorrectName)
 TEST(ConfManager, IncorrectAddress)
 {
     std::string filename = "tests/configs/incorrect_address.yaml";
-    EXPECT_ANY_THROW({ configuration_manager::instance_ptr()->load_config_file(filename); });
+    EXPECT_THROW(configuration_manager::instance_ptr()->load_config_file(filename), YAML::Exception);
 
     std::string ip_address = configuration_manager::instance_ptr()->get_config()->connection_ep_.ip_address_;
     ASSERT_EQ(ip_address, "");
@@ -50,7 +50,7 @@ TEST(ConfManager, IncorrectAddress)
 TEST(ConfManager, IncorrectPort)
 {
     std::string filename = "tests/configs/incorrect_port.yaml";
-    EXPECT_ANY_THROW({ configuration_manager::instance_ptr()->load_config_file(filename); });
+    EXPECT_THROW(configuration_manager::instance_ptr()->load_config_file(filename), YAML::Exception);
 
     std::uint16_t port = configuration_manager::instance_ptr()->get_config()->connection_ep_.port_;
     ASSERT_EQ(port, 0);
@@ -58,24 +58,24 @@ TEST(ConfManager, IncorrectPort)
     configuration_manager::instance_ptr()->reset_config_struct();
 }
 
-TEST(ConfManager, IncorrectLogfile)
+TEST(ConfManager, IncorrectPidfile)
 {
-    std::string filename = "tests/configs/incorrect_logfile.yaml";
-    EXPECT_ANY_THROW({ configuration_manager::instance_ptr()->load_config_file(filename); });
+    std::string filename = "tests/configs/incorrect_pidfile.yaml";
+    EXPECT_THROW(configuration_manager::instance_ptr()->load_config_file(filename), YAML::Exception);
 
-    std::string logfile = configuration_manager::instance_ptr()->get_config()->paths_.log_.logfile_;
-    ASSERT_EQ(logfile, "");
+    std::string pidfile = configuration_manager::instance_ptr()->get_config()->paths_.pid_.pidfile_;
+    ASSERT_EQ(pidfile, "");
 
     configuration_manager::instance_ptr()->reset_config_struct();
 }
 
-TEST(ConfManager, IncorrectPidfile)
+TEST(ConfManager, IncorrectLogfile)
 {
-    std::string filename = "tests/configs/incorrect_pidfile.yaml";
-    EXPECT_ANY_THROW({ configuration_manager::instance_ptr()->load_config_file(filename); });
+    std::string filename = "tests/configs/incorrect_logfile.yaml";
+    EXPECT_THROW(configuration_manager::instance_ptr()->load_config_file(filename), YAML::Exception);
 
-    std::string pidfile = configuration_manager::instance_ptr()->get_config()->paths_.pid_.pidfile_;
-    ASSERT_EQ(pidfile, "");
+    std::string logfile = configuration_manager::instance_ptr()->get_config()->paths_.log_.logfile_;
+    ASSERT_EQ(logfile, "");
 
     configuration_manager::instance_ptr()->reset_config_struct();
 }

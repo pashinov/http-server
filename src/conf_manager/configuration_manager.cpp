@@ -35,7 +35,7 @@ void configuration_manager::load_config_file(std::string filename)
         get_pidfile();
         get_logfile();
     }
-    catch(YAML::ParserException &ex)
+    catch(YAML::Exception &ex)
     {
         throw ex;
     }
@@ -57,7 +57,7 @@ void configuration_manager::get_server_name()
     {
         cfg_->server_name_ = config_["Server"]["Name"].as<std::string>();
     }
-    catch(YAML::ParserException& ex)
+    catch(YAML::Exception& ex)
     {
         throw ex;
     }
@@ -69,7 +69,7 @@ void configuration_manager::get_ip_address()
     {
         cfg_->connection_ep_.ip_address_ = config_["Server"]["Connection endpiont"]["ip_addr"].as<std::string>();
     }
-    catch(YAML::ParserException& ex)
+    catch(YAML::Exception& ex)
     {
         throw ex;
     }
@@ -81,10 +81,10 @@ void configuration_manager::get_port()
     {
         cfg_->connection_ep_.port_ = config_["Server"]["Connection endpiont"]["port"].as<std::uint16_t>();
     }
-    catch(YAML::ParserException& ex)
+    catch(YAML::Exception& ex)
     {
         throw ex;
-	}
+    }
 }
 
 void configuration_manager::get_pidfile()
@@ -93,7 +93,7 @@ void configuration_manager::get_pidfile()
     {
         cfg_->paths_.pid_.pidfile_ = config_["Server"]["Paths"]["Pid"]["pidfile"].as<std::string>();
     }
-    catch(YAML::ParserException& ex)
+    catch(YAML::Exception& ex)
     {
         throw ex;
     }
@@ -105,7 +105,7 @@ void configuration_manager::get_logfile()
     {
         cfg_->paths_.log_.logfile_ = config_["Server"]["Paths"]["Log"]["logfile"].as<std::string>();
     }
-    catch(YAML::ParserException& ex)
+    catch(YAML::Exception& ex)
     {
         throw ex;
     }
