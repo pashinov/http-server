@@ -41,6 +41,11 @@ void configuration_manager::load_config_file(std::string filename)
     }
 }
 
+void configuration_manager::reset_config_struct()
+{
+    *cfg_ = {};
+}
+
 const configuration_struct* configuration_manager::get_config() noexcept
 {
     return cfg_;

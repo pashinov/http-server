@@ -31,6 +31,11 @@ public:
     void load_config_file(std::string filename);
 
     /**
+     * @brief reset configuration structure
+     */
+    void reset_config_struct();
+
+    /**
      * @brief get configuration structure
      */
     const configuration_struct* get_config() noexcept;

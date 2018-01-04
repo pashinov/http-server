@@ -1,0 +1,23 @@
+#
+#  Description: General configuration file
+#
+
+#--- General Server Settings ---
+Server:
+  #--- Server name ---
+  Name: 'server'
+
+  #--- Connection endpoint settings ---
+  Connection endpiont:
+    ip_addr: '127.0.0.1'
+    port: '12345'
+
+  #--- Paths ---
+  Paths:
+    #--- Path to log file ---
+    Log:
+      logfile_incorrect: '/var/log/server/logfile'
+
+    #--- Path to pid file ---
+    Pid:
+      pidfile: '/var/run/server.pid'
