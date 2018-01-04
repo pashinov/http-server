@@ -51,7 +51,7 @@ aux_source_directory( tests SOURCES_TEST )
 aux_source_directory( src/conf_manager SOURCES_TEST )
 
 add_executable( GoogleTest ${SOURCES_TEST} )
-target_link_libraries( GoogleTest gtest  gtest_main pthread yaml-cpp )
+target_link_libraries( GoogleTest gtest pthread yaml-cpp )
 
 enable_testing()
 add_test( GoogleTest GoogleTest )
