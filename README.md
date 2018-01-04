@@ -4,7 +4,6 @@ HTTP Server
 [![Travis CI logo][travis-image]][travis-link]
 
 [![Build Status][travis-badge]][travis-link]
-[![codecov][codecov-badge]][codecov-link]
 [![MIT License][license-badge]][license-link]
 
 [travis-badge]:    https://travis-ci.org/pashinov/server.svg?branch=master
