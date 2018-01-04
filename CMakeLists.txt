@@ -22,37 +22,37 @@ set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
 ################################
 # Code Coverage
 ################################
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+set( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake )
 
-include(CodeCoverage)
-setup_target_for_coverage(${PROJECT_NAME}_coverage ${PROJECT_NAME} coverage)
+include( CodeCoverage )
+setup_target_for_coverage( ${PROJECT_NAME}_coverage ${PROJECT_NAME} coverage )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage" )
 ###############################
 
 
 ################################
 # GTest
 ################################
-set(GOOGLETEST_ROOT external/googletest/googletest CACHE STRING "Google Test source root")
+set( GOOGLETEST_ROOT external/googletest/googletest CACHE STRING "Google Test source root" )
 
 include_directories(
         ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}
         ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}/include
 )
 
-set(GOOGLETEST_SOURCES
+set( GOOGLETEST_SOURCES
         ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}/src/gtest-all.cc
-        ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}/src/gtest_main.cc
-        )
+        ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}/src/gtest_main.cc )
 
-foreach(_source ${GOOGLETEST_SOURCES})
-    set_source_files_properties(${_source} PROPERTIES GENERATED 1)
+foreach( _source ${GOOGLETEST_SOURCES} )
+    set_source_files_properties( ${_source} PROPERTIES GENERATED 1 )
 endforeach()
 
-add_library(gtest ${GOOGLETEST_SOURCES})
+add_library( gtest ${GOOGLETEST_SOURCES} )
 
 include_directories(
+        inc/common
         inc/conf_manager
         ${GTEST_INCLUDE_DIRS}
 )
@@ -96,7 +96,7 @@ add_executable( ${PROJECT_NAME} ${SOURCES} )
 target_link_libraries( ${PROJECT_NAME} pthread yaml-cpp )
 
 # create log directory
-set( log_directory "/var/log/${PROJECT_NAME}")
+set( log_directory "/var/log/${PROJECT_NAME}" )
 install( CODE "FILE(MAKE_DIRECTORY ${log_directory})" )
 
 # install scripts
@@ -120,6 +120,7 @@ install( TARGETS ${PROJECT_NAME} DESTINATION bin )
 configure_file(
         "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Uninstall.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-        IMMEDIATE @ONLY)
+        IMMEDIATE @ONLY
+)
 
-add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
+add_custom_target( uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake )
