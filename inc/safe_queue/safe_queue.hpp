@@ -66,7 +66,7 @@ public:
     {
         std::lock_guard<std::mutex> lock(mutex_);
 
-        if (max_num_items_ > 0 && queue_.size() > max_num_items_)
+        if (max_num_items_ > 0 && queue_.size() >= max_num_items_)
         {
             return false;
         }
@@ -86,7 +86,7 @@ public:
     {
         std::lock_guard<std::mutex>lock(mutex_);
 
-        if (max_num_items_ > 0 && queue_.size() > max_num_items_)
+        if (max_num_items_ > 0 && queue_.size() >= max_num_items_)
         {
             return false;
         }
