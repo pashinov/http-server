@@ -26,9 +26,14 @@ public:
 
     /**
      * @brief load configuration file
-     * @throw YAML::ParserException
+     * @throw YAML::Exception
      */
     void load_config_file(std::string filename);
+
+    /**
+     * @brief reset configuration structure
+     */
+    void reset_config_struct();
 
     /**
      * @brief get configuration structure
@@ -38,31 +43,31 @@ public:
 private:
     /**
      * @brief get server name
-     * @throw YAML::ParserException
+     * @throw YAML::Exception
      */
     void get_server_name();
 
     /**
      * @brief gerp ap address
-     * @throw YAML::ParserException
+     * @throw YAML::Exception
      */
     void get_ip_address();
 
     /**
      * @brief get connection port
-     * @throw YAML::ParserException
+     * @throw YAML::Exception
      */
     void get_port();
 
     /**
      * @brief get path to pid file
-     * @throw YAML::ParserException
+     * @throw YAML::Exception
      */
     void get_pidfile();
 
     /**
      * @brief get path to log file
-     * @throw YAML::ParserException
+     * @throw YAML::Exception
      */
     void get_logfile();
 

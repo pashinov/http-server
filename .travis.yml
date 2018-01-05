@@ -28,10 +28,16 @@ install:
     - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
     - sudo apt-get install libboost-all-dev
+    - sudo apt-get install -qq lcov
     - bash ci/travis/install-linux.sh
 
 script:
     - mkdir build
-    - cd build
+    - pushd build
     - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
     - make
+    - popd
+    - ./GoogleTest
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
