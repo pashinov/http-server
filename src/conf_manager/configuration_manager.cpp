@@ -68,7 +68,7 @@ void configuration_manager::get_ip_address()
 {
     try
     {
-        cfg_->connection_ep_.ip_address_ = config_["Server"]["Connection endpiont"]["ip_addr"].as<std::string>();
+        cfg_->connection_ep_.ip_address_ = config_["Server"]["Connection endpoint"]["ip_addr"].as<std::string>();
     }
     catch(YAML::Exception& ex)
     {
@@ -80,7 +80,7 @@ void configuration_manager::get_port()
 {
     try
     {
-        cfg_->connection_ep_.port_ = config_["Server"]["Connection endpiont"]["port"].as<std::string>();
+        cfg_->connection_ep_.port_ = config_["Server"]["Connection endpoint"]["port"].as<std::string>();
     }
     catch(YAML::Exception& ex)
     {
@@ -92,7 +92,7 @@ void configuration_manager::get_doc_root()
 {
     try
     {
-        cfg_->connection_ep_.doc_root_ = config_["Server"]["Connection endpiont"]["doc_root"].as<std::string>();
+        cfg_->connection_ep_.doc_root_ = config_["Server"]["Connection endpoint"]["doc_root"].as<std::string>();
     }
     catch(YAML::Exception& ex)
     {

@@ -8,7 +8,7 @@ Server:
   Name: 'server'
 
   #--- Connection endpoint settings ---
-  Connection endpiont:
+  Connection endpoint:
     ip_addr_incorrect: '127.0.0.1'
     port: '12345'
     doc_root: '/var/www/html'

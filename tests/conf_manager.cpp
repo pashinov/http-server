@@ -63,8 +63,8 @@ TEST(ConfManager, IncorrectDocRoot)
     std::string filename = "tests/configs/incorrect_doc_root.yaml";
     EXPECT_THROW(configuration_manager::instance_ptr()->load_config_file(filename), YAML::Exception);
 
-    std::string port = configuration_manager::instance_ptr()->get_config()->connection_ep_.port_;
-    ASSERT_EQ(port, "");
+    std::string doc_root = configuration_manager::instance_ptr()->get_config()->connection_ep_.doc_root_;
+    ASSERT_EQ(doc_root, "");
 
     configuration_manager::instance_ptr()->reset_config_struct();
 }
