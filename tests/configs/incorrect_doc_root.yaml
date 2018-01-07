@@ -10,8 +10,8 @@ Server:
   #--- Connection endpoint settings ---
   Connection endpiont:
     ip_addr: '127.0.0.1'
-    port_incorrect: '12345'
-    doc_root: '/var/www/html'
+    port: '12345'
+    doc_root_incorrect: '/var/www/html'
 
   #--- Paths ---
   Paths:

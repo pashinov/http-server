@@ -11,6 +11,7 @@ Server:
   Connection endpiont:
     ip_addr: '127.0.0.1'
     port: '12345'
+    doc_root: '/var/www/html'
 
   #--- Paths ---
   Paths:

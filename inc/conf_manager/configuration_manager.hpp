@@ -60,6 +60,12 @@ private:
     void get_port();
 
     /**
+     * @brief get document port
+     * @throw YAML::Exception
+     */
+    void get_doc_root();
+
+    /**
      * @brief get path to pid file
      * @throw YAML::Exception
      */

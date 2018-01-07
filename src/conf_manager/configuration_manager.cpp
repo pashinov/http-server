@@ -32,6 +32,7 @@ void configuration_manager::load_config_file(std::string filename)
         get_server_name();
         get_ip_address();
         get_port();
+        get_doc_root();
         get_pidfile();
         get_logfile();
     }
@@ -79,7 +80,19 @@ void configuration_manager::get_port()
 {
     try
     {
-        cfg_->connection_ep_.port_ = config_["Server"]["Connection endpiont"]["port"].as<std::uint16_t>();
+        cfg_->connection_ep_.port_ = config_["Server"]["Connection endpiont"]["port"].as<std::string>();
+    }
+    catch(YAML::Exception& ex)
+    {
+        throw ex;
+    }
+}
+
+void configuration_manager::get_doc_root()
+{
+    try
+    {
+        cfg_->connection_ep_.doc_root_ = config_["Server"]["Connection endpiont"]["doc_root"].as<std::string>();
     }
     catch(YAML::Exception& ex)
     {

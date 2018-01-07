@@ -13,8 +13,8 @@ TEST(ConfManager, CorrectFile)
     std::string ip_address = configuration_manager::instance_ptr()->get_config()->connection_ep_.ip_address_;
     ASSERT_EQ(ip_address, "127.0.0.1");
 
-    std::uint16_t port = configuration_manager::instance_ptr()->get_config()->connection_ep_.port_;
-    ASSERT_EQ(port, 12345);
+    std::string port = configuration_manager::instance_ptr()->get_config()->connection_ep_.port_;
+    ASSERT_EQ(port, "12345");
 
     std::string logfile = configuration_manager::instance_ptr()->get_config()->paths_.log_.logfile_;
     ASSERT_EQ(logfile, "/var/log/server/logfile");
@@ -52,8 +52,19 @@ TEST(ConfManager, IncorrectPort)
     std::string filename = "tests/configs/incorrect_port.yaml";
     EXPECT_THROW(configuration_manager::instance_ptr()->load_config_file(filename), YAML::Exception);
 
-    std::uint16_t port = configuration_manager::instance_ptr()->get_config()->connection_ep_.port_;
-    ASSERT_EQ(port, 0);
+    std::string port = configuration_manager::instance_ptr()->get_config()->connection_ep_.port_;
+    ASSERT_EQ(port, "");
+
+    configuration_manager::instance_ptr()->reset_config_struct();
+}
+
+TEST(ConfManager, IncorrectDocRoot)
+{
+    std::string filename = "tests/configs/incorrect_doc_root.yaml";
+    EXPECT_THROW(configuration_manager::instance_ptr()->load_config_file(filename), YAML::Exception);
+
+    std::string port = configuration_manager::instance_ptr()->get_config()->connection_ep_.port_;
+    ASSERT_EQ(port, "");
 
     configuration_manager::instance_ptr()->reset_config_struct();
 }

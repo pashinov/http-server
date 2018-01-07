@@ -20,7 +20,8 @@ struct configuration_struct
     struct connection_ep
     {
         std::string ip_address_;
-        std::uint16_t port_;
+        std::string port_;
+        std::string doc_root_;
     };
 
     struct paths
