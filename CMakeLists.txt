@@ -54,6 +54,7 @@ add_library( gtest ${GOOGLETEST_SOURCES} )
 include_directories(
         inc/common
         inc/conf_manager
+        inc/safe_queue
         ${GTEST_INCLUDE_DIRS}
 )
 
