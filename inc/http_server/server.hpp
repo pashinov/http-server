@@ -6,14 +6,15 @@
 
 #pragma once
 
-#ifndef SERVER_H_
-#define SERVER_H_
+#ifndef SERVER_HPP_
+#define SERVER_HPP_
 
 #include <boost/asio.hpp>
 #include <string>
 
 #include <connection.hpp>
 #include <connection_manager.hpp>
+#include <request_handler.hpp>
 
 namespace http
 {
@@ -30,7 +31,7 @@ namespace http
              * @brief Construct the server to listen on the specified TCP address and port, and
              * serve up files from the given directory.
              */
-            explicit server(const std::string& address, const std::string& port);
+            explicit server(const std::string& address, const std::string& port, const std::string& doc_root);
 
             /**
              * @brief Run the server's io_service loop.
@@ -55,14 +56,17 @@ namespace http
             //! Acceptor used to listen for incoming connections.
             boost::asio::ip::tcp::acceptor acceptor_;
 
+            //! The next socket to be accepted.
+            boost::asio::ip::tcp::socket socket_;
+
             //! The connection manager which owns all live connections.
             connection_manager connection_manager_;
 
-            //! The next socket to be accepted.
-            boost::asio::ip::tcp::socket socket_;
+            //! The handler for all incoming requests.
+            request_handler request_handler_;
         };
 
     } // namespace server
 } // namespace http
 
-#endif //SERVER_H_
+#endif //SERVER_HPP_

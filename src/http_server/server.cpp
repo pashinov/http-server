@@ -7,10 +7,12 @@ namespace http
     namespace server
     {
 
-        server::server(const std::string& address, const std::string& port) : io_service_(),
-                                                                              acceptor_(io_service_),
-                                                                              connection_manager_(),
-                                                                              socket_(io_service_)
+        server::server(const std::string& address, const std::string& port, const std::string& doc_root)
+                : io_service_(),
+                  acceptor_(io_service_),
+                  connection_manager_(),
+                  socket_(io_service_),
+                  request_handler_(doc_root)
         {
             // Open the acceptor with the option to reuse the address (i.e. SO_REUSEADDR).
             boost::asio::ip::tcp::resolver resolver(io_service_);
@@ -50,7 +52,7 @@ namespace http
 
             if (!ec)
             {
-                connection_manager_.start(std::make_shared<connection>(std::move(socket_), connection_manager_));
+                connection_manager_.start(std::make_shared<connection>(std::move(socket_), connection_manager_, request_handler_));
             }
 
             do_accept();

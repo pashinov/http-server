@@ -5,9 +5,11 @@ namespace http
 {
     namespace server
     {
-        connection::connection(boost::asio::ip::tcp::socket socket, connection_manager& manager)
+        connection::connection(boost::asio::ip::tcp::socket socket, connection_manager& manager,
+                               request_handler& handler)
                 : socket_(std::move(socket)),
-                  connection_manager_(manager)
+                  connection_manager_(manager),
+                  request_handler_(handler)
         {
 
         }
@@ -34,7 +36,24 @@ namespace http
         {
             if (!ec)
             {
-                do_write(bytes_transferred);
+                request_parser::result_type result;
+                std::tie(result, std::ignore) = request_parser_.parse(
+                        request_, buffer_.data(), buffer_.data() + bytes_transferred);
+
+                if (result == request_parser::good)
+                {
+                    request_handler_.handle_request(request_, reply_);
+                    do_write();
+                }
+                else if (result == request_parser::bad)
+                {
+                    reply_ = reply::stock_reply(reply::bad_request);
+                    do_write();
+                }
+                else
+                {
+                    do_read();
+                }
             }
             else if (ec != boost::asio::error::operation_aborted)
             {
@@ -42,10 +61,10 @@ namespace http
             }
         }
 
-        void connection::do_write(std::size_t bytes_for_transfer)
+        void connection::do_write()
         {
             boost::asio::async_write(socket_,
-                                     boost::asio::buffer(buffer_, bytes_for_transfer),
+                                     reply_.to_buffers(),
                                      std::bind(&connection::write_handler,
                                                shared_from_this(),
                                                std::placeholders::_1,

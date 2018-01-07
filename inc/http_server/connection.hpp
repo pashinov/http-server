@@ -6,12 +6,17 @@
 
 #pragma once
 
-#ifndef CONNECTION_H_
-#define CONNECTION_H_
+#ifndef CONNECTION_HPP_
+#define CONNECTION_HPP_
 
 #include <array>
 #include <boost/asio.hpp>
 #include <memory>
+
+#include <request_handler.hpp>
+#include <request_parser.hpp>
+#include <request.hpp>
+#include <reply.hpp>
 
 namespace http
 {
@@ -29,7 +34,8 @@ namespace http
             /**
              * @brief Construct a connection with the given socket.
              */
-            explicit connection(boost::asio::ip::tcp::socket socket, connection_manager& manager);
+            explicit connection(boost::asio::ip::tcp::socket socket, connection_manager& manager,
+                                request_handler& handler);
 
             /**
              * @brief Start the first asynchronous operation for the connection.
@@ -50,7 +56,7 @@ namespace http
             /**
              * @brief Perform an asynchronous write operation.
              */
-            void do_write(std::size_t bytes_transferred);
+            void do_write();
 
             /**
              * @brief Perform an read handler.
@@ -71,6 +77,18 @@ namespace http
 
             //! Buffer for incoming data.
             std::array<char, 8192> buffer_;
+
+            //! The incoming request.
+            request request_;
+
+            //! The parser for the incoming request.
+            request_parser request_parser_;
+
+            //! The handler used to process the incoming request.
+            request_handler& request_handler_;
+
+            //! The reply to be sent back to the client.
+            reply reply_;
         };
 
         typedef std::shared_ptr<connection> connection_ptr;
@@ -78,4 +96,4 @@ namespace http
     } // namespace server
 } // namespace htt
 
-#endif // CONNECTION_H_
+#endif // CONNECTION_HPP_
