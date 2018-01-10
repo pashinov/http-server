@@ -6,8 +6,8 @@
 
 #pragma once
 
-#ifndef DELEGATE_H_
-#define DELEGATE_H_
+#ifndef DELEGATE_HPP_
+#define DELEGATE_HPP_
 
 #include <functional>
 #include <map>
@@ -73,6 +73,12 @@ public:
     /*! Destroy delegate */
     ~delegate() = default;
 
+    delegate(const delegate& copy) = delete;
+    delegate& operator=(const delegate& copy) = delete;
+
+    delegate(delegate&& copy) = delete;
+    delegate& operator=(delegate&& copy) = delete;
+
     /**
      * @brief Connect function
      * @param Delegated function
@@ -99,4 +105,4 @@ private:
     mutable std::map<std::uint32_t, std::function<void()>> table_;
 };
 
-#endif // DELEGATE_H_
+#endif // DELEGATE_HPP_

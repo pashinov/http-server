@@ -6,8 +6,8 @@
 
 #pragma once
 
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef LOGGER_HPP_
+#define LOGGER_HPP_
 
 #include <mutex>
 
@@ -34,15 +34,18 @@ public:
     logger(const logger& copy) = delete;
     logger& operator=(const logger& copy) = delete;
 
+    logger(logger&& copy) = delete;
+    logger& operator=(logger&& copy) = delete;
+
     /**
      * @brief initialization logfile
-     * @throw TODO:
+     * @throw logger_exception
      */
     void init_log_file(std::string filename);
 
     /**
      * @brief initialization logfile
-     * @throw TODO:
+     * @throw logger_exception
      */
     void init_log_file(level log_level, std::string filename);
 
@@ -58,19 +61,19 @@ public:
 
     /**
      * @brief write log message
-     * @throw TODO:
+     * @throw logger_exception
      */
     void log(std::string message) const;
 
     /**
      * @brief write log message
-     * @throw TODO:
+     * @throw logger_exception
      */
     void log(level level, std::string message) const;
 
     /**
      * @brief clear log file
-     * @throw TODO:
+     * @throw logger_exception
      */
     void clear_log_file() const;
 
@@ -92,8 +95,8 @@ private:
     level level_filter_;
     //! log filename
     std::string filename_;
-    //!
+    //! mutex
     mutable std::mutex mutex_log_;
 };
 
-#endif // LOGGER_H
+#endif //LOGGER_HPP_

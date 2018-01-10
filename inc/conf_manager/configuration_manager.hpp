@@ -6,8 +6,8 @@
 
 #pragma once
 
-#ifndef CONFIGURATION_MANAGER_H_
-#define CONFIGURATION_MANAGER_H_
+#ifndef CONFIGURATION_MANAGER_HPP_
+#define CONFIGURATION_MANAGER_HPP_
 
 #include <yaml-cpp/yaml.h>
 
@@ -23,6 +23,9 @@ public:
 
     configuration_manager(const configuration_manager& copy) = delete;
     configuration_manager& operator=(const configuration_manager& copy) = delete;
+
+    configuration_manager(configuration_manager&& copy) = delete;
+    configuration_manager& operator=(configuration_manager&& copy) = delete;
 
     /**
      * @brief load configuration file
@@ -85,4 +88,4 @@ private:
     YAML::Node config_ = YAML::Node(YAML::NodeType::Map);
 };
 
-#endif // CONFIGURATION_MANAGER_H_
+#endif //CONFIGURATION_MANAGER_H_

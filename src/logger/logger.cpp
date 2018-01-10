@@ -1,15 +1,15 @@
 #include <fstream>
 
+#include <exception_type.hpp>
 #include <logger.hpp>
+#include <logger_exception.hpp>
 #include <utility.hpp>
 
-//////////////////////////////////////////////////////////////////////////
 logger::logger() : level_filter_(level::normal)
 {
 
 }
 
-//////////////////////////////////////////////////////////////////////////
 void logger::init_log_file(std::string filename)
 {
     assert(!filename.empty());
@@ -18,13 +18,12 @@ void logger::init_log_file(std::string filename)
 
     logger::clear_log_file();
 
-    if (this->push(level_filter_, "Logfile initialization complete"))
+    if (this->push(level_filter_, "/------------------------------/"))
     {
-        throw; //TODO:
+        throw logger_exception(exception_type::logger_init);
     }
 }
 
-//////////////////////////////////////////////////////////////////////////
 void logger::init_log_file(level log_level, std::string filename)
 {
     assert(!filename.empty());
@@ -34,54 +33,49 @@ void logger::init_log_file(level log_level, std::string filename)
 
     logger::clear_log_file();
 
-    if (this->push(level_filter_, "Logfile initialization complete"))
+    if (this->push(level_filter_, "/------------------------------/"))
     {
-        throw; //TODO:
+        throw logger_exception(exception_type::logger_init);
     }
 }
 
-//////////////////////////////////////////////////////////////////////////
 void logger::set_log_level(level log_level) noexcept
 {
     level_filter_ = log_level;
 }
 
-//////////////////////////////////////////////////////////////////////////
 void logger::log(std::string message) const
 {
     if (this->push(level_filter_, message))
     {
-        throw; //TODO:
+        throw logger_exception(exception_type::logger_write);
     }
 }
 
-//////////////////////////////////////////////////////////////////////////
 void logger::log(level log_level, std::string message) const
 {
     if (log_level >= level_filter_)
     {
         if (this->push(log_level, message))
         {
-            throw; //TODO:
+            throw logger_exception(exception_type::logger_write);
         }
     }
 }
 
-//////////////////////////////////////////////////////////////////////////
 void logger::clear_log_file() const
 {
-    if (!filename_.empty())
+    assert(!filename_.empty());
+
+    std::ofstream stream;
     {
-        std::ofstream stream;
+        std::lock_guard<std::mutex> guard(mutex_log_);
+        stream.open(filename_,  std::ios::out | std::ios::trunc);
+        if(!stream.is_open())
         {
-            std::lock_guard<std::mutex> guard(mutex_log_);
-            stream.open(filename_,  std::ios::out | std::ios::trunc);
-            if(!stream.is_open())
-            {
-                throw; //TODO:
-            }
-            stream.close();
+            throw logger_exception(exception_type::logger_clear);
         }
+        stream.close();
     }
 }
 
@@ -103,7 +97,6 @@ bool logger::push(level log_level, std::string message) const noexcept
     return false;
 }
 
-//////////////////////////////////////////////////////////////////////////
 std::string logger::print(level level, std::string message) const noexcept
 {
     std::string datetime = utility::get_date_time();

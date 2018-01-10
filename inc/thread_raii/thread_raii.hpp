@@ -6,8 +6,8 @@
 
 #pragma once
 
-#ifndef RAII_THREAD_H_
-#define RAII_THREAD_H_
+#ifndef RAII_THREAD_HPP_
+#define RAII_THREAD_HPP_
 
 #include <atomic>
 #include <thread>
@@ -69,4 +69,4 @@ thread_raii::thread_raii(Function&& f, Args&&... args) noexcept
     thread_ = std::thread(std::forward<Function>(f), std::ref(token_), std::forward<Args>(args)...);
 }
 
-#endif // RAII_THREAD_H_
+#endif //RAII_THREAD_H_

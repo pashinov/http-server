@@ -6,8 +6,8 @@
 
 #pragma once
 
-#ifndef UTILITY_H
-#define UTILITY_H
+#ifndef UTILITY_HPP_
+#define UTILITY_HPP_
 
 #include <string>
 
@@ -24,15 +24,15 @@ namespace utility
 
     /**
      * @brief initialization configuration file
-     * @throw TODO
+     * @throw YAML::Exception
      */
     void initialization_config(std::string filename);
 
     /**
      * @brief initialization log file
-     * @throw TODO
+     * @throw logger_exception
      */
     void initialization_logger(std::string filename);
 };
 
-#endif // UTILITY_H
+#endif //UTILITY_HPP_

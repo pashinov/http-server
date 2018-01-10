@@ -7,10 +7,8 @@
 
 #include <background_application.hpp>
 #include <configuration_manager.hpp>
-
 #include <logger.hpp>
 
-//////////////////////////////////////////////////////////////////////////
 void background_application::start_background() noexcept
 {
     /* Our process ID */
@@ -33,14 +31,14 @@ void background_application::start_background() noexcept
             sid = setsid();
             if (sid < 0)
             {
-                logger::instance().log("Failed to create new SID for child process");
+                logger::instance_ptr()->log(level::error, "Failed to create new SID for child process");
                 std::exit(EXIT_FAILURE);
             }
 
             /* Change the current working directory */
             if ((chdir("/")) < 0)
             {
-                logger::instance().log("Failed to set working directory");
+                logger::instance_ptr()->log(level::error, "Failed to set working directory");
                 std::exit(EXIT_FAILURE);
             }
 
@@ -59,13 +57,15 @@ void background_application::start_background() noexcept
             {
                 case static_cast<pid_t>(background_application::process::CHILD_PROCESS):
                 {
+                    logger::instance_ptr()->log(level::info, "Starting HTTP server.");
+
                     this->run();
                     break;
                 }
 
                 case static_cast<pid_t>(background_application::process::ERROR_PROCESS):
                 {
-                    logger::instance().log("Failed to create worker process");
+                    logger::instance_ptr()->log(level::error, "Failed to create worker process");
                     std::exit(EXIT_FAILURE);
                 }
 
@@ -74,7 +74,7 @@ void background_application::start_background() noexcept
                     if (background_application::create_pidfile(getpid(), configuration_manager::instance().get_config()->
                             paths_.pid_.pidfile_))
                     {
-                        logger::instance().log("Failed to create pidfile");
+                        logger::instance_ptr()->log(level::error, "Failed to create pidfile");
                         std::exit(EXIT_FAILURE);
                     }
 
@@ -97,6 +97,9 @@ void background_application::start_background() noexcept
                         background_application::remove_pidfile(configuration_manager::instance().get_config()->
                                 paths_.pid_.pidfile_);
                         kill(pid, SIGUSR1);
+
+                        logger::instance_ptr()->log(level::info, "HTTP server was stopped.");
+
                         std::exit(EXIT_SUCCESS);
                     }
                     break;
@@ -108,7 +111,7 @@ void background_application::start_background() noexcept
 
         case static_cast<pid_t>(background_application::process::ERROR_PROCESS):
         {
-            logger::instance().log("Failed to create master process");
+            logger::instance_ptr()->log(level::error, "Failed to create master process");
             std::exit(EXIT_FAILURE);
         }
 
@@ -119,7 +122,6 @@ void background_application::start_background() noexcept
     }
 }
 
-//////////////////////////////////////////////////////////////////////////
 bool background_application::create_pidfile(pid_t pid, std::string filename) const noexcept
 {
     assert(!filename.empty());
@@ -134,7 +136,6 @@ bool background_application::create_pidfile(pid_t pid, std::string filename) con
     return false;
 }
 
-//////////////////////////////////////////////////////////////////////////
 bool background_application::remove_pidfile(std::string filename) const noexcept
 {
     assert(!filename.empty());
@@ -144,7 +145,6 @@ bool background_application::remove_pidfile(std::string filename) const noexcept
     return false;
 }
 
-//////////////////////////////////////////////////////////////////////////
 void background_application::set_signal(sigset_t& sigset, siginfo_t& siginfo) const noexcept
 {
     sigemptyset(&sigset);

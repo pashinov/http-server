@@ -115,6 +115,12 @@ set( config_install_dir "/etc/server" )
 install( CODE "FILE(MAKE_DIRECTORY ${config_install_dir})" )
 install( FILES "${project_config}" DESTINATION "${config_install_dir}" )
 
+# install web
+set( html_directory "/var/www/html" )
+set( index_html ${CMAKE_CURRENT_SOURCE_DIR}/html/index.html )
+install( CODE "FILE(MAKE_DIRECTORY ${html_directory})" )
+install( FILES "${index_html}" DESTINATION "${html_directory}" )
+
 # install target
 set( CMAKE_INSTALL_PREFIX /usr/local )
 install( TARGETS ${PROJECT_NAME} DESTINATION bin )

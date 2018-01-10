@@ -7,8 +7,8 @@
 
 #pragma once
 
-#ifndef CONFIG_STRUCT_H_
-#define CONFIG_STRUCT_H_
+#ifndef CONFIG_STRUCT_HPP_
+#define CONFIG_STRUCT_HPP_
 
 #include <string>
 
@@ -44,4 +44,4 @@ struct configuration_struct
     paths paths_;
 };
 
-#endif // CONFIG_STRUCT_H_
+#endif //CONFIG_STRUCT_HPP_

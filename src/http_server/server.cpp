@@ -1,5 +1,6 @@
 #include <utility>
 
+#include <logger.hpp>
 #include <server.hpp>
 
 namespace http
@@ -23,6 +24,8 @@ namespace http
             acceptor_.listen();
 
             do_accept();
+
+            logger::instance_ptr()->log(level::info, "HTTP server is running.");
         }
 
         void server::run()

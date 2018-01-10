@@ -7,8 +7,8 @@
 
 #pragma once
 
-#ifndef BACKGROUND_APPLICATION_H_
-#define BACKGROUND_APPLICATION_H_
+#ifndef BACKGROUND_APPLICATION_HPP_
+#define BACKGROUND_APPLICATION_HPP_
 
 #include <signal.h>
 #include <string>
@@ -18,6 +18,12 @@ class background_application
 public:
     background_application() = default;
     virtual ~background_application() {};
+
+    background_application(const background_application& copy) = delete;
+    background_application& operator=(const background_application& copy) = delete;
+
+    background_application(background_application&& copy) = delete;
+    background_application& operator=(background_application&& copy) = delete;
 
     /**
      * @brief runs a program as a Unix daemon
@@ -54,4 +60,4 @@ private:
     enum class process : pid_t { CHILD_PROCESS = 0, ERROR_PROCESS = -1 };
 };
 
-#endif // BACKGROUND_APPLICATION_H_
+#endif //BACKGROUND_APPLICATION_HPP_

@@ -322,4 +322,4 @@ void swap (safe_queue<T, container>& q1, safe_queue<T, container>& q2)
     q1.swap(q2);
 }
 
-#endif // SAFE_QUEUE_HPP_
+#endif //SAFE_QUEUE_HPP_

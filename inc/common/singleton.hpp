@@ -6,8 +6,8 @@
 
 #pragma once
 
-#ifndef SINGLETON_H_
-#define SINGLETON_H_
+#ifndef SINGLETON_HPP_
+#define SINGLETON_HPP_
 
 #include <cassert>
 #include <memory>
@@ -49,4 +49,4 @@ public:
 
 template <class T> std::shared_ptr<T> singleton<T>::instance_ = nullptr;
 
-#endif // SINGLETON_H_
+#endif //SINGLETON_HPP_

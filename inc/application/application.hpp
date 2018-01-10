@@ -6,8 +6,8 @@
 
 #pragma once
 
-#ifndef APPLICATION_H_
-#define APPLICATION_H_
+#ifndef APPLICATION_HPP_
+#define APPLICATION_HPP_
 
 #include <signal.h>
 
@@ -19,10 +19,16 @@ public:
     application() = default;
     ~application() = default;
 
+    application(const application& copy) = delete;
+    application& operator=(const application& copy) = delete;
+
+    application(application&& copy) = delete;
+    application& operator=(application&& copy) = delete;
+
     /**
      * @brief main function
      */
     void run() noexcept override;
 };
 
-#endif // APPLICATION_H_
+#endif //APPLICATION_HPP_
