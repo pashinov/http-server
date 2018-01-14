@@ -11,11 +11,9 @@ HTTP Server
 
 [travis-badge]:     https://travis-ci.org/pashinov/server.svg?branch=master
 [travis-link]:      https://travis-ci.org/pashinov/server
-[travis-image]:     https://github.com/pashinov/server/blob/master/img/TravisCI.png
 [codecov-badge]:    https://codecov.io/gh/pashinov/server/branch/master/graph/badge.svg
 [codecov-link]:     https://codecov.io/gh/pashinov/server
-[codecov-image]:    https://github.com/pashinov/server/blob/master/img/Codecov.png
 [release-badge]:    https://img.shields.io/badge/release-v1.0.0-blue.svg
 [release-link]:     https://github.com/pashinov/server/releases
-[license-badge]:    https://img.shields.io/badge/license-MIT-blue.svg
+[license-badge]:    https://img.shields.io/badge/License-MIT-yellow.svg
 [license-link]:     https://github.com/pashinov/server/blob/master/LICENSE

@@ -10,7 +10,7 @@ const std::string& exception_parser::find_exception_msg(exception_type type) con
 }
 
 const std::string exception_parser::exception_msg_[] = {
-                "Error initializing logfile",
-                "Error writing to logfile",
-                "Error cleaning logfile"
+        "Error initializing logfile",
+        "Error writing to logfile",
+        "Error cleaning logfile"
 };

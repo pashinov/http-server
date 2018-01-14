@@ -15,7 +15,7 @@ enum exception_type
     logger_write,
     logger_clear,
 
-	exception_type_end
+    exception_type_end
 };
 
 #endif //EXCEPTION_TYPE_HPP_
