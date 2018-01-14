@@ -13,9 +13,6 @@ int main(int argc, char* argv[])
     {
         utility::initialization_config("/etc/server/server.yaml");
         utility::initialization_logger(configuration_manager::instance_ptr()->get_config()->paths_.log_.logfile_);
-
-        std::unique_ptr<application> app = std::make_unique<application>();
-        app->start_background();
     }
     catch(logger_exception &ex)
     {
@@ -25,6 +22,9 @@ int main(int argc, char* argv[])
     {
         std::cout << "configuration manager: " << ex.what() << std::endl;
     }
+
+    std::unique_ptr<application> app = std::make_unique<application>();
+    app->start_background();
 
     return 0;
 }
