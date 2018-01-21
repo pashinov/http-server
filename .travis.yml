@@ -1,26 +1,27 @@
-dist:     trusty
 sudo:     required
+dist:     trusty
 language: cpp
 
-os:
-    - linux
-
-compiler:
-    - gcc
-
-env:
-    matrix:
-        - BUILD_CONFIGURATION=Debug
-        - BUILD_CONFIGURATION=Release
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r/test
+          package:
+            - g++-6
+        update-alternatives:
+          --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
+          --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+      env:
+        COMPILER=g++ BUILD_CONFIGURATION=Debug
+        COMPILER=g++ BUILD_CONFIGURATION=Release
 
 before_install:
-    - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
     - sudo apt-get update -qq
 
 install:
-    - sudo apt-get install -qq g++-6
-    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
-    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
     - sudo apt-get install libboost-all-dev
     - sudo apt-get install -qq lcov
     - bash ci/travis/install-linux.sh
@@ -28,7 +29,7 @@ install:
 script:
     - mkdir build
     - pushd build
-    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+    - cmake .. -DCMAKE_CXX_COMPILER=$COMPILER -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
     - make
     - popd
     - ./GoogleTest

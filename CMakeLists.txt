@@ -3,6 +3,9 @@
 # stop if cmake version below 3.7.2
 cmake_minimum_required( VERSION 3.7.2 FATAL_ERROR)
 
+# enable c and c++ language
+enable_language(C CXX)
+
 # choice of standard
 set_target_properties( ${TARGET} PROPERTIES
         CXX_STANDARD 17
@@ -10,10 +13,16 @@ set_target_properties( ${TARGET} PROPERTIES
         CXX_EXTENSIONS NO
         )
 
-# project variable
-set ( PROJECT_NAME server )
+# example how to set c++ compiler flags for GNU
+if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
+    set( CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused" )
+    set( CMAKE_CXX_FLAGS_DEBUG   "-O0 -g" )
+    set( CMAKE_CXX_FLAGS_RELEASE "-O2" )
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage" )
+endif()
 
 # project name
+set ( PROJECT_NAME server )
 project ( ${PROJECT_NAME} )
 
 # output folder for binaries
@@ -120,6 +129,16 @@ set( html_directory "/var/www/html" )
 set( index_html ${CMAKE_CURRENT_SOURCE_DIR}/html/index.html )
 install( CODE "FILE(MAKE_DIRECTORY ${html_directory})" )
 install( FILES "${index_html}" DESTINATION "${html_directory}" )
+
+#set( web_dist_dir /var/www )
+#set( css_src_dir ${CMAKE_CURRENT_SOURCE_DIR}/web/css )
+#set( fonts_src_dir ${CMAKE_CURRENT_SOURCE_DIR}/web/fonts )
+#set( js_src_dir ${CMAKE_CURRENT_SOURCE_DIR}/web/js )
+#set( index_html ${CMAKE_CURRENT_SOURCE_DIR}/web/index.html )
+#install( DIRECTORY ${css_src_dir} DESTINATION ${web_dist_dir} )
+#install( DIRECTORY ${fonts_src_dir} DESTINATION ${web_dist_dir} )
+#install( DIRECTORY ${js_src_dir} DESTINATION ${web_dist_dir} )
+#install( FILES ${index_html} DESTINATION ${web_dist_dir} )
 
 # install target
 set( CMAKE_INSTALL_PREFIX /usr/local )
