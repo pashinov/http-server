@@ -2,37 +2,39 @@ sudo:     required
 dist:     trusty
 language: cpp
 
+compiler:
+  - gcc
+
 matrix:
   include:
-    - compiler: gcc
+    - os: linux
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r/test
-          package:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-6
             - g++-6
-        update-alternatives:
-          --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
-          --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+            - libboost-all-dev
+            - lcov
       env:
-        COMPILER=g++ BUILD_CONFIGURATION=Debug
-        COMPILER=g++ BUILD_CONFIGURATION=Release
+        - COMPILER=g++-6 BUILD_TYPE=Debug
+        - COMPILER=g++-6 BUILD_TYPE=Release
 
 before_install:
-    - sudo apt-get update -qq
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
 
 install:
-    - sudo apt-get install libboost-all-dev
-    - sudo apt-get install -qq lcov
-    - bash ci/travis/install-linux.sh
+  - bash ci/travis/install-linux.sh
 
 script:
-    - mkdir build
-    - pushd build
-    - cmake .. -DCMAKE_CXX_COMPILER=$COMPILER -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
-    - make
-    - popd
-    - ./GoogleTest
+  - mkdir build
+  - pushd build
+  - cmake .. -DCMAKE_CXX_COMPILER=$COMPILER -DCMAKE_BUILD_TYPE=BUILD_TYPE
+  - make
+  - popd
+  - ./GoogleTest
 
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
