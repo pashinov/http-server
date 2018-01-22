@@ -6,6 +6,7 @@ os: linux
 
 compiler:
   - gcc
+  - clang
 
 matrix:
   include:
@@ -29,12 +30,36 @@ matrix:
     - env: COMPILER=g++-6 BUILD_TYPE=Release
       addons: *gcc6
 
+    ##########################################################################
+    # Clang on Linux
+    ##########################################################################
+
+    # Clang 4.0
+    - env: COMPILER=clang++-4.0 BUILD_TYPE=Debug
+      addons: &clang40
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-4.0
+          packages:
+            - gcc-6
+            - g++-6
+            - clang-4.0
+            - libboost-all-dev
+            - lcov
+
+    - env: COMPILER=clang++-4.0 BUILD_TYPE=Release
+      addons: *clang40
+
+
 before_install:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
 
+
 install:
   - bash ci/travis/install-linux.sh
+
 
 script:
   - mkdir build
@@ -43,6 +68,7 @@ script:
   - make
   - popd
   - ./GoogleTest
+
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
