@@ -7,8 +7,14 @@ compiler:
 
 matrix:
   include:
-    - os: linux
-      addons:
+
+    ##########################################################################
+    # GCC on Linux
+    ##########################################################################
+
+    # GCC 6
+    - env: COMPILER=g++-6 BUILD_TYPE=Debug
+      addons: &gcc6
         apt:
           sources:
             - ubuntu-toolchain-r-test
@@ -17,9 +23,9 @@ matrix:
             - g++-6
             - libboost-all-dev
             - lcov
-      env:
-        - COMPILER=g++-6 BUILD_TYPE=Debug
-        - COMPILER=g++-6 BUILD_TYPE=Release
+
+    - env: COMPILER=g++-6 BUILD_TYPE=Release
+      addons: *gcc5
 
 before_install:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
