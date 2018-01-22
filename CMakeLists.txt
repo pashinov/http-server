@@ -4,11 +4,9 @@
 cmake_minimum_required( VERSION 3.7.2 FATAL_ERROR)
 
 # choice of standard
-set_target_properties( ${TARGET} PROPERTIES
-        CXX_STANDARD 17
-        CXX_STANDARD_REQUIRED YES
-        CXX_EXTENSIONS NO
-        )
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # project variable
 set ( PROJECT_NAME server )

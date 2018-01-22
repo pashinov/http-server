@@ -32,10 +32,10 @@ matrix:
     # Clang on Linux
     ##########################################################################
 
-    # Clang 4.0
-    - env: C_COMPILER=clang-4.0 CXX_COMPILER=clang++-4.0 BUILD_TYPE=Debug
+    # Clang 5.0
+    - env: C_COMPILER=clang-5.0 CXX_COMPILER=clang++-5.0 BUILD_TYPE=Debug
       compiler: clang
-      addons: &clang40
+      addons: &clang50
         apt:
           sources:
             - ubuntu-toolchain-r-test
@@ -49,7 +49,7 @@ matrix:
 
     - env: C_COMPILER=clang-5.0 CXX_COMPILER=clang++-5.0 BUILD_TYPE=Release
       compiler: clang
-      addons: *clang40
+      addons: *clang50
 
 
 before_install:
