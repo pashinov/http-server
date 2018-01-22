@@ -9,7 +9,7 @@
 #ifndef CONNECTION_HPP_
 #define CONNECTION_HPP_
 
-#include <array>
+#include <boost/array.hpp>
 #include <boost/asio.hpp>
 #include <memory>
 
@@ -76,7 +76,7 @@ namespace http
             connection_manager& connection_manager_;
 
             //! Buffer for incoming data.
-            std::array<char, 8192> buffer_;
+            boost::array<char, 8192> buffer_;
 
             //! The incoming request.
             request request_;
