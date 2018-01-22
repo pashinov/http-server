@@ -2,6 +2,8 @@ sudo:     required
 dist:     trusty
 language: cpp
 
+os: linux
+
 compiler:
   - gcc
 
@@ -25,7 +27,7 @@ matrix:
             - lcov
 
     - env: COMPILER=g++-6 BUILD_TYPE=Release
-      addons: *gcc5
+      addons: *gcc6
 
 before_install:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90
