@@ -39,15 +39,15 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-4.0
+            - llvm-toolchain-trusty-5.0
           packages:
             - gcc-6
             - g++-6
-            - clang-4.0
+            - clang-5.0
             - libboost-all-dev
             - lcov
 
-    - env: C_COMPILER=clang-4.0 CXX_COMPILER=clang++-4.0 BUILD_TYPE=Release
+    - env: C_COMPILER=clang-5.0 CXX_COMPILER=clang++-5.0 BUILD_TYPE=Release
       compiler: clang
       addons: *clang40
 
