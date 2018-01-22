@@ -77,4 +77,6 @@ script:
 
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - if [ "$BUILD_TYPE" == "Debug" ]; then
+      bash <(curl -s https://codecov.io/bash);
+    fi

@@ -17,8 +17,8 @@ project ( ${PROJECT_NAME} )
 # set c++ compiler flags for GNU
 if( CMAKE_CXX_COMPILER_ID MATCHES GNU )
     set( CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused" )
-    set( CMAKE_CXX_FLAGS_DEBUG   "-O0 -g3" )
-    set( CMAKE_CXX_FLAGS_RELEASE "-O3" )
+    set( CMAKE_CXX_FLAGS_DEBUG   "-O0 -g" )
+    set( CMAKE_CXX_FLAGS_RELEASE "-O2" )
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage" )
 endif()
 
@@ -28,10 +28,12 @@ set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
 ################################
 # Code Coverage
 ################################
-set( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake )
+if( CMAKE_BUILD_TYPE MATCHES Debug )
+    set( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake )
 
-include( CodeCoverage )
-setup_target_for_coverage( ${PROJECT_NAME}_coverage ${PROJECT_NAME} coverage )
+    include( CodeCoverage )
+    setup_target_for_coverage( ${PROJECT_NAME}_coverage ${PROJECT_NAME} coverage )
+endif()
 ###############################
 
 
