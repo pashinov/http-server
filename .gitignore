@@ -1,4 +1,4 @@
 .idea/
 cmake-build-debug/
-/server
+/http-server
 /GoogleTest

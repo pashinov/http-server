@@ -9,7 +9,7 @@ set( CMAKE_CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
 # project variable
-set ( PROJECT_NAME server )
+set ( PROJECT_NAME http-server )
 
 # project name
 project ( ${PROJECT_NAME} )
@@ -116,8 +116,8 @@ install( FILES "${project_scripts}"
         DESTINATION "${scripts_install_dir}" )
 
 # install config
-set( project_config ${CMAKE_CURRENT_SOURCE_DIR}/config/server.yaml )
-set( config_install_dir "/etc/server" )
+set( project_config ${CMAKE_CURRENT_SOURCE_DIR}/config/http-server.yaml )
+set( config_install_dir "/etc/http-server" )
 install( CODE "FILE(MAKE_DIRECTORY ${config_install_dir})" )
 install( FILES "${project_config}" DESTINATION "${config_install_dir}" )
 

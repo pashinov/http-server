@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 {
     try
     {
-        utility::initialization_config("/etc/server/server.yaml");
+        utility::initialization_config("/etc/http-server/http-server.yaml");
         utility::initialization_logger(configuration_manager::instance_ptr()->get_config()->paths_.log_.logfile_);
     }
     catch(logger_exception &ex)
