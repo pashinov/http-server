@@ -18,16 +18,24 @@ HTTP Server
 http-server is a simple asynchronous http server running as linux daemon.
 
 To build and install the application:
+```
 $ mkdir build && cd build
 $ cmake [-DCMAKE_BUILD_TYPE=Release|Debug] ..
 $ make
 $ sudo make install
+```
 
 To run the application:
+```
 $ /etc/init.d/http-server start
+```
 
 To stop the application:
+```
 $ /etc/init.d/http-server stop
+```
 
 To check status the application:
+```
 $ /etc/init.d/http-server status
+```
