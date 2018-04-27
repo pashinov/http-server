@@ -4,11 +4,11 @@
 
 TEST(ConfManager, CorrectFile)
 {
-    std::string filename = "config/server.yaml";
+    std::string filename = "config/http-server.yaml";
     configuration_manager::instance_ptr()->load_config_file(filename);
 
     std::string server_name = configuration_manager::instance_ptr()->get_config()->server_name_;
-    ASSERT_EQ(server_name, "server");
+    ASSERT_EQ(server_name, "http-server");
 
     std::string ip_address = configuration_manager::instance_ptr()->get_config()->connection_ep_.ip_address_;
     ASSERT_EQ(ip_address, "127.0.0.1");
@@ -17,10 +17,10 @@ TEST(ConfManager, CorrectFile)
     ASSERT_EQ(port, "12345");
 
     std::string logfile = configuration_manager::instance_ptr()->get_config()->paths_.log_.logfile_;
-    ASSERT_EQ(logfile, "/var/log/server/logfile");
+    ASSERT_EQ(logfile, "/var/log/http-server/logfile");
 
     std::string pidfile = configuration_manager::instance_ptr()->get_config()->paths_.pid_.pidfile_;
-    ASSERT_EQ(pidfile, "/var/run/server.pid");
+    ASSERT_EQ(pidfile, "/var/run/http-server.pid");
 
     configuration_manager::instance_ptr()->reset_config_struct();
 }

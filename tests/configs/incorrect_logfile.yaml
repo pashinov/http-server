@@ -4,8 +4,8 @@
 
 #--- General Server Settings ---
 Server:
-  #--- Server name ---
-  Name: 'server'
+  #--- HTTP server name ---
+  Name: 'http-server'
 
   #--- Connection endpoint settings ---
   Connection endpoint:
@@ -17,8 +17,8 @@ Server:
   Paths:
     #--- Path to log file ---
     Log:
-      logfile_incorrect: '/var/log/server/logfile'
+      logfile_incorrect: '/var/log/http-server/logfile'
 
     #--- Path to pid file ---
     Pid:
-      pidfile: '/var/run/server.pid'
+      pidfile: '/var/run/http-server.pid'
