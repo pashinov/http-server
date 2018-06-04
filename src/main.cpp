@@ -1,3 +1,4 @@
+#include <boost/program_options.hpp>
 #include <iostream>
 #include <memory>
 
@@ -7,8 +8,28 @@
 #include <logger_exception.hpp>
 #include <utility.hpp>
 
+
+namespace po = boost::program_options;
+
+
 int main(int argc, char* argv[])
 {
+    po::options_description opts("service options");
+
+    opts.add_options()
+            ("help", "produce a help message")
+            ("console", "run on console")
+            ("daemon", "run as a service");
+
+    po::variables_map vm;
+    po::store(po::parse_command_line(argc, argv, opts), vm);
+
+    if (vm.count("help") || argc == 1)
+    {
+        std::cout << opts << std::endl;
+        return 0;
+    }
+
     try
     {
         utility::initialization_config("/etc/http-server/http-server.yaml");
@@ -17,14 +38,24 @@ int main(int argc, char* argv[])
     catch(logger_exception &ex)
     {
         std::cout << ex.what() << std::endl;
+        exit(EXIT_FAILURE);
     }
     catch(YAML::Exception &ex)
     {
         std::cout << "configuration manager: " << ex.what() << std::endl;
+        exit(EXIT_FAILURE);
     }
 
     std::unique_ptr<application> app = std::make_unique<application>();
-    app->start_background();
+
+    if (vm.count("console"))
+    {
+        app->run();
+    }
+    else if (vm.count("daemon"))
+    {
+        app->start_background();
+    }
 
     return 0;
 }

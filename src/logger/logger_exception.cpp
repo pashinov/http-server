@@ -9,6 +9,6 @@ logger_exception::logger_exception(exception_type type) noexcept :
 
 const char* logger_exception::what() const noexcept
 {
-    std::string msg = "logger: " + msg_;
+    static std::string msg = "logger: " + msg_;
 	return msg.c_str();
 }

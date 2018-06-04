@@ -102,7 +102,7 @@ aux_source_directory( src/thread_raii SOURCES )
 add_executable( ${PROJECT_NAME} ${SOURCES} )
 
 # link process
-target_link_libraries( ${PROJECT_NAME} pthread yaml-cpp boost_system)
+target_link_libraries( ${PROJECT_NAME} pthread yaml-cpp boost_system boost_program_options)
 
 # create log directory
 set( log_directory "/var/log/${PROJECT_NAME}" )
