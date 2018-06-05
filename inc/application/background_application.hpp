@@ -39,6 +39,7 @@ private:
     /**
      * @brief create pid file contain pid number
      * current process
+     *
      * @return bool status flag
      */
 	bool create_pidfile(pid_t pid, std::string filename) const noexcept;
@@ -46,17 +47,18 @@ private:
     /**
      * @brief remove pid file contain pid number
      * current process
+     *
      * @return bool status flag
      */
     bool remove_pidfile(std::string filename) const noexcept;
 
     /**
-     * @brief add POSIX signal sets
+     * @brief registration POSIX signals
      */
-    void set_signal(sigset_t& sigset, siginfo_t& siginfo) const noexcept;
+    void set_signals(sigset_t& sigset, siginfo_t& siginfo) const noexcept;
 
 private:
-    //! which process running
+    //! which process is running
     enum class process : pid_t { CHILD_PROCESS = 0, ERROR_PROCESS = -1 };
 };
 

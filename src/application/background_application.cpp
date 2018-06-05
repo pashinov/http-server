@@ -11,17 +11,13 @@
 
 void background_application::start_background() noexcept
 {
-    /* Our process ID */
     pid_t pid;
-
-    /* Fork off the parent process */
     pid = fork();
 
     switch (pid)
     {
         case static_cast<pid_t>(background_application::process::CHILD_PROCESS):
         {
-            /* Our Session ID */
             pid_t sid;
 
             /* Change the file mode mask */
@@ -47,10 +43,7 @@ void background_application::start_background() noexcept
             close(STDOUT_FILENO);
             close(STDERR_FILENO);
 
-            /* Our process ID */
             pid_t pid;
-
-            /* Fork off the parent process */
             pid = fork();
 
             switch(pid)
@@ -81,26 +74,38 @@ void background_application::start_background() noexcept
                     sigset_t sigset;
                     siginfo_t siginfo;
 
-                    background_application::set_signal(sigset, siginfo);
+                    background_application::set_signals(sigset, siginfo);
 
                     sigwaitinfo(&sigset, &siginfo);
 
                     if (siginfo.si_signo == SIGCHLD)
                     {
-                        background_application::remove_pidfile(configuration_manager::instance().get_config()->
-                                paths_.pid_.pidfile_);
-                        waitpid(pid, 0, WNOHANG);
-                        std::exit(EXIT_SUCCESS);
+                        if (background_application::remove_pidfile(configuration_manager::instance().get_config()->
+                                paths_.pid_.pidfile_))
+                        {
+                            waitpid(pid, 0, WNOHANG);
+                            std::exit(EXIT_SUCCESS);
+                        }
+                        else
+                        {
+                            logger::instance_ptr()->log(level::error, "Failed to remove pidfile");
+                            std::exit(EXIT_FAILURE);
+                        }
                     }
                     else if (siginfo.si_signo == SIGUSR1)
                     {
-                        background_application::remove_pidfile(configuration_manager::instance().get_config()->
-                                paths_.pid_.pidfile_);
-                        kill(pid, SIGUSR1);
-
-                        logger::instance_ptr()->log(level::info, "HTTP server was stopped.");
-
-                        std::exit(EXIT_SUCCESS);
+                        if (background_application::remove_pidfile(configuration_manager::instance().get_config()->
+                                paths_.pid_.pidfile_))
+                        {
+                            kill(pid, SIGUSR1);
+                            logger::instance_ptr()->log(level::info, "HTTP server was stopped.");
+                            std::exit(EXIT_SUCCESS);
+                        }
+                        else
+                        {
+                            logger::instance_ptr()->log(level::error, "Failed to remove pidfile");
+                            std::exit(EXIT_FAILURE);
+                        }
                     }
                     break;
                 }
@@ -145,7 +150,7 @@ bool background_application::remove_pidfile(std::string filename) const noexcept
     return false;
 }
 
-void background_application::set_signal(sigset_t& sigset, siginfo_t& siginfo) const noexcept
+void background_application::set_signals(sigset_t& sigset, siginfo_t& siginfo) const noexcept
 {
     sigemptyset(&sigset);
     sigaddset(&sigset, SIGUSR1);
