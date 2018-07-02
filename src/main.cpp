@@ -2,11 +2,11 @@
 #include <iostream>
 #include <memory>
 
-#include <application.hpp>
-#include <configuration_manager.hpp>
-#include <logger.hpp>
-#include <logger_exception.hpp>
-#include <utility.hpp>
+#include <application/application.hpp>
+#include <conf_manager/configuration_manager.hpp>
+#include <logger/logger.hpp>
+#include <logger/logger_exception.hpp>
+#include <common/utility.hpp>
 
 
 namespace po = boost::program_options;

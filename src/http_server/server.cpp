@@ -1,7 +1,7 @@
 #include <utility>
 
-#include <logger.hpp>
-#include <server.hpp>
+#include <logger/logger.hpp>
+#include <http_server/server.hpp>
 
 namespace http
 {

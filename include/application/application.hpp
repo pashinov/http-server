@@ -11,7 +11,7 @@
 
 #include <signal.h>
 
-#include <background_application.hpp>
+#include <application/background_application.hpp>
 
 class application : public background_application
 {

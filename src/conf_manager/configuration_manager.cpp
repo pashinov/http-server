@@ -1,6 +1,6 @@
 #include <cassert>
 
-#include <configuration_manager.hpp>
+#include <conf_manager/configuration_manager.hpp>
 
 configuration_struct* configuration_manager::cfg_ = nullptr;
 

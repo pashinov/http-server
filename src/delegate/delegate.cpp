@@ -1,4 +1,4 @@
-#include <delegate.hpp>
+#include <delegate/delegate.hpp>
 
 std::uint32_t delegate<void>::connect(std::function<void()> const & delegate) const noexcept
 {

@@ -1,9 +1,9 @@
 #include <iomanip>
 
-#include <configuration_manager.hpp>
-#include <logger.hpp>
-#include <logger_exception.hpp>
-#include <utility.hpp>
+#include <conf_manager/configuration_manager.hpp>
+#include <logger/logger.hpp>
+#include <logger/logger_exception.hpp>
+#include <common/utility.hpp>
 
 std::string utility::get_date_time(void)
 {

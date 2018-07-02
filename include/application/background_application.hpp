@@ -55,7 +55,7 @@ private:
     /**
      * @brief registration POSIX signals
      */
-    void set_signals(sigset_t& sigset, siginfo_t& siginfo) const noexcept;
+    void set_signals(sigset_t& sigset) const noexcept;
 
 private:
     //! which process is running

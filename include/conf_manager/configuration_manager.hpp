@@ -11,8 +11,8 @@
 
 #include <yaml-cpp/yaml.h>
 
-#include <configuration_struct.hpp>
-#include <singleton.hpp>
+#include <conf_manager/configuration_struct.hpp>
+#include <common/singleton.hpp>
 
 //////////////////////////////////////////////////////////////////////////
 class configuration_manager : public singleton<configuration_manager>

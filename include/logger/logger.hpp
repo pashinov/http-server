@@ -11,7 +11,7 @@
 
 #include <mutex>
 
-#include <singleton.hpp>
+#include <common/singleton.hpp>
 
 //////////////////////////////////////////////////////////////////////////
 enum class level // level is incremental, i.e. info contains warning

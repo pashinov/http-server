@@ -12,9 +12,9 @@
 #include <boost/asio.hpp>
 #include <string>
 
-#include <connection.hpp>
-#include <connection_manager.hpp>
-#include <request_handler.hpp>
+#include <http_server/connection.hpp>
+#include <http_server/connection_manager.hpp>
+#include <http_server/request_handler.hpp>
 
 namespace http
 {

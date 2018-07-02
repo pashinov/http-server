@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <configuration_manager.hpp>
+#include <conf_manager/configuration_manager.hpp>
 
 TEST(ConfManager, CorrectFile)
 {

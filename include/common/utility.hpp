@@ -33,6 +33,6 @@ namespace utility
      * @throw logger_exception
      */
     void initialization_logger(std::string filename);
-};
+}
 
 #endif //UTILITY_HPP_

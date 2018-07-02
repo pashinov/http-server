@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <safe_queue.hpp>
+#include <safe_queue/safe_queue.hpp>
 
 TEST(SafeQueue, MainTest)
 {

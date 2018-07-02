@@ -13,10 +13,10 @@
 #include <boost/asio.hpp>
 #include <memory>
 
-#include <request_handler.hpp>
-#include <request_parser.hpp>
-#include <request.hpp>
-#include <reply.hpp>
+#include <http_server/request_handler.hpp>
+#include <http_server/request_parser.hpp>
+#include <http_server/request.hpp>
+#include <http_server/reply.hpp>
 
 namespace http
 {

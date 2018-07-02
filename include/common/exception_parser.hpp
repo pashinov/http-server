@@ -11,8 +11,8 @@
 
 #include <string>
 
-#include <exception_type.hpp>
-#include <singleton.hpp>
+#include <common/exception_type.hpp>
+#include <common/singleton.hpp>
 
 class exception_parser : public singleton<exception_parser>
 {

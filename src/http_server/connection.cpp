@@ -1,5 +1,5 @@
-#include <connection.hpp>
-#include <connection_manager.hpp>
+#include <http_server/connection.hpp>
+#include <http_server/connection_manager.hpp>
 
 namespace http
 {

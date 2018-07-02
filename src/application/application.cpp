@@ -1,9 +1,9 @@
 #include <memory>
 
-#include <application.hpp>
-#include <configuration_manager.hpp>
-#include <logger.hpp>
-#include <server.hpp>
+#include <application/application.hpp>
+#include <conf_manager/configuration_manager.hpp>
+#include <logger/logger.hpp>
+#include <http_server/server.hpp>
 
 void application::run() noexcept
 {

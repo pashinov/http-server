@@ -12,7 +12,7 @@
 #include <string>
 #include <exception>
 
-#include <exception_type.hpp>
+#include <common/exception_type.hpp>
 
 class logger_exception : public std::exception
 {

@@ -12,10 +12,10 @@
 #include <sstream>
 #include <string>
 
-#include <mime_types.hpp>
-#include <reply.hpp>
-#include <request_handler.hpp>
-#include <request.hpp>
+#include <http_server/mime_types.hpp>
+#include <http_server/reply.hpp>
+#include <http_server/request_handler.hpp>
+#include <http_server/request.hpp>
 
 namespace http {
     namespace server {

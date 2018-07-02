@@ -15,7 +15,7 @@
 
 #include <set>
 
-#include <connection.hpp>
+#include <http_server/connection.hpp>
 
 namespace http {
     namespace server {

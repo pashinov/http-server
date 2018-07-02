@@ -1,9 +1,9 @@
 #include <fstream>
 
-#include <exception_type.hpp>
-#include <logger.hpp>
-#include <logger_exception.hpp>
-#include <utility.hpp>
+#include <common/exception_type.hpp>
+#include <logger/logger.hpp>
+#include <logger/logger_exception.hpp>
+#include <common/utility.hpp>
 
 logger::logger() : level_filter_(level::normal)
 {

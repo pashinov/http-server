@@ -5,9 +5,9 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#include <background_application.hpp>
-#include <configuration_manager.hpp>
-#include <logger.hpp>
+#include <application/background_application.hpp>
+#include <conf_manager/configuration_manager.hpp>
+#include <logger/logger.hpp>
 
 void background_application::start_background() noexcept
 {
@@ -74,7 +74,7 @@ void background_application::start_background() noexcept
                     sigset_t sigset;
                     siginfo_t siginfo;
 
-                    background_application::set_signals(sigset, siginfo);
+                    background_application::set_signals(sigset);
 
                     sigwaitinfo(&sigset, &siginfo);
 
@@ -150,7 +150,7 @@ bool background_application::remove_pidfile(std::string filename) const noexcept
     return false;
 }
 
-void background_application::set_signals(sigset_t& sigset, siginfo_t& siginfo) const noexcept
+void background_application::set_signals(sigset_t& sigset) const noexcept
 {
     sigemptyset(&sigset);
     sigaddset(&sigset, SIGUSR1);
