@@ -35,8 +35,10 @@ if(WITH_MSAN)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=memory -fno-omit-frame-pointer -g")
 endif()
 
+# main source file
+set(SRC_MAIN_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+
 # location of source files
-aux_source_directory( ${CMAKE_CURRENT_SOURCE_DIR}/src SRC_FILES )
 aux_source_directory( ${CMAKE_CURRENT_SOURCE_DIR}/src/application SRC_FILES )
 aux_source_directory( ${CMAKE_CURRENT_SOURCE_DIR}/src/common SRC_FILES )
 aux_source_directory( ${CMAKE_CURRENT_SOURCE_DIR}/src/conf_manager SRC_FILES )
@@ -50,7 +52,7 @@ include_directories(include)
 find_package(Boost COMPONENTS system program_options REQUIRED)
 include_directories(${BOOST_INCLUDE_DIRS})
 
-add_executable(http-server ${SRC_FILES})
+add_executable(http-server ${SRC_MAIN_FILES} ${SRC_FILES})
 
 target_link_libraries(${PROJECT_NAME}
         pthread

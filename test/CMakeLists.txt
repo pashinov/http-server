@@ -27,6 +27,11 @@ set(TEST_SRC_FILES
         test_safe_queue.cpp
         )
 
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+get_filename_component(CONF_PATH ${PROJECT_SOURCE_DIR}/config/http-server.yaml ABSOLUTE)
+configure_file(userpaths.cmake ${CMAKE_CURRENT_BINARY_DIR}/userpaths.h)
+
 foreach(_test_file ${TEST_SRC_FILES})
     get_filename_component(_test_name ${_test_file} NAME_WE)
     add_executable(${_test_name} ${_test_file} ${SRC_FILES})

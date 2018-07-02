@@ -2,9 +2,11 @@
 
 #include <conf_manager/configuration_manager.hpp>
 
+#include "userpaths.h"
+
 TEST(ConfManager, CorrectFile)
 {
-    std::string filename = "config/http-server.yaml";
+    std::string filename = CONF_PATH;
     configuration_manager::instance_ptr()->load_config_file(filename);
 
     std::string server_name = configuration_manager::instance_ptr()->get_config()->server_name_;
