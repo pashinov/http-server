@@ -75,7 +75,8 @@ script:
   - if [ "$WITH_TESTS" == "ON" ]; then
       make test;
       if [ "$C_COMPILER" == "gcc-6" ] && [ "$CXX_COMPILER" == "g++-6" ]; then
-        make coverage;
+        make test_conf_manager_coverage;
+        make test_safe_queue_coverage;
       fi
     fi
   - popd
