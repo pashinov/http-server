@@ -15,7 +15,7 @@ export PATH=$CMAKE_DIR/bin:$PATH
 # manually install yaml-cpp 0.5.3
 wget https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.6.2.tar.gz
 tar -xzvf yaml-cpp-0.6.2.tar.gz
-pushd yaml-cpp-0.6.2
+pushd yaml-cpp-yaml-cpp-0.6.2
 mkdir build
 pushd build
 cmake -DBUILD_SHARED_LIBS=OFF ..
