@@ -13,8 +13,9 @@ tar --strip-components=1 -xzf $CMAKE_TAR -C $CMAKE_DIR
 export PATH=$CMAKE_DIR/bin:$PATH
 
 # manually install yaml-cpp 0.5.3
-git clone --depth=50 --branch=yaml-cpp-0.5.3 https://github.com/jbeder/yaml-cpp.git
-pushd yaml-cpp
+wget https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-0.6.2.tar.gz
+tar -xzvf yaml-cpp-0.6.2.tar.gz
+pushd yaml-cpp-0.6.2
 mkdir build
 pushd build
 cmake -DBUILD_SHARED_LIBS=OFF ..
